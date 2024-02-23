@@ -14,12 +14,14 @@
 	<link rel="stylesheet" href="{='src/styles/main.css'|asset}">
 </head>
 
-<body data-controller="body" class="aspect-[3/4] flex flex-col justify-center">
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+<body data-controller="body">
+	<div class="flex flex-col h-screen bg-slate-800 text-white">
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+		{include header.latte}
+		{include content}
+		{include footer.latte}
+	</div>
 
-	{include content}
-
-	{block scripts}
-	{/block}
+	{block scripts}{/block}
 </body>
 </html>
