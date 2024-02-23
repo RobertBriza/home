@@ -1,15 +1,41 @@
 parameters:
 
-
 application:
 	errorPresenter: Error
+	catchExceptions: %productionMode%
 	mapping:
-		*: [App, Modules\*, Presenters\*Presenter]
+		*: [App, *\UI\Http\Web, *Presenter]
 
+search:
+	autowired:
+		in: %appDir%
+		implements:
+		- App\System\Application\Wiring\Autowired
 
 session:
 	expiration: 14 days
 
+extensions:
+	resources: Contributte\DI\Extension\ResourceExtension
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	translation: Contributte\Translation\DI\TranslationExtension
+
+translation:
+	localeResolvers:
+		- Contributte\Translation\LocalesResolvers\Session
+	locales:
+		whitelist: [cs, en]
+		default: cs
+		fallback: [cs]
+	dirs:
+		- %appDir%/../lang
+	loaders:
+		yml: Symfony\Component\Translation\Loader\YamlFileLoader
+	returnOriginalMessage: true
+
+console:
+	name: Contributte
+	version: 0.9.2
 
 di:
 	export:
@@ -18,4 +44,4 @@ di:
 
 tracy:
 	bar:
-		- VitePanel
+		- App\System\Application\Vite\VitePanel

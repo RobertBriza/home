@@ -1,6 +1,33 @@
 services:
-        - App\Router\RouterFactory::createRouter
-        - Vite(http://localhost:5173, %wwwDir%/manifest.json, not(%debugMode%))
-        nette.latteFactory:
-            setup:
-                - addFilter(asset, App\Latte\AssetFilter())
+	- App\System\Application\Vite\Vite(http://localhost:5173, %wwwDir%/manifest.json, not(%debugMode%))
+	nette.latteFactory:
+			setup:
+					- addFilter(asset, App\System\Application\Latte\AssetFilter())
+
+	- App\System\Application\Routing\Factory\RouterFactory::createRouter
+	- App\System\Application\Helper\TemplateRenderer(@twigEnvironment)
+	- App\System\Application\Mapping\MapperNameResolver(typed(App\System\Application\Mapping\Mapper))
+
+	inflector: App\System\Application\Inflector\InflectorFactory::create()
+
+	- App\System\Application\Mapping\Map\CollectionMap(typed(App\System\Application\Mapping\Map\Collection\CollectionTypeMap))
+
+	configLoader:
+		factory: Twig\Loader\FilesystemLoader(%appDir%/../deploy/local)
+	twigEnvironment:
+		factory: Twig\Environment(@configLoader)
+
+decorator:
+	App\System\Application\Mapping\Mapper:
+		setup:
+			- setTypeMaps(typed(App\System\Application\Mapping\Map\TypeMap))
+
+	App\System\Application\CQRS\Command\CommandHandler:
+		setup:
+			- setMapper(@App\System\Application\Mapping\CommandEntityMapper)
+			- setEntityManager(@Doctrine\ORM\EntityManagerInterface)
+
+	App\System\Application\CQRS\Query\QueryHandler:
+		setup:
+			- setMapper(@App\System\Application\Mapping\QueryEntityMapper)
+			- setEntityManager(@Doctrine\ORM\EntityManagerInterface)

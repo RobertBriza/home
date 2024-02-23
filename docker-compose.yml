@@ -1,28 +1,43 @@
+version: '3.8'
+
 services:
   web:
-    image: josefjebavy/debian-apache-php8.0-nette
-    working_dir: /var/www/html
+    container_name: php
+    environment:
+      - MYSQL_HOST=$MYSQL_HOST
+    build:
+      args:
+        SECRET_DIR: $SECRET_DIR
+      context: $VOLUME_BASE_DIR
+      dockerfile: $VOLUME_BASE_DIR/.docker/php/Dockerfile
     volumes:
-      - .:/var/www/html
+      - $VOLUME_BASE_DIR:/var/www/html
+      - ./.docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    working_dir: /var/www/html
+    depends_on:
+      - db
+
+  nginx:
+    container_name: nginx
+    build:
+      dockerfile: $VOLUME_BASE_DIR/.docker/nginx/Dockerfile
+      context: $VOLUME_BASE_DIR
     ports:
-      - 80:80
-      - 443:443
+      - "8888:8080"
+    volumes:
+      - $VOLUME_BASE_DIR:/var/www/html
+    restart: on-failure
+    depends_on:
+      - web
 
   db:
-    image: mariadb:10.6
+    image: mariadb:10.6.7
+    container_name: db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: root
-    volumes:
-      - .docker/mysql:/var/lib/mysql
-
-  adminer:
-    image: adminer
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     ports:
-      - 8080:8080
-
-  composer:
-    image: composer
-    command: [ "composer", "install" ]
-    volumes:
-      - .:/app
+      - "3306:3306"
+    restart: on-failure

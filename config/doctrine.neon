@@ -1,0 +1,45 @@
+services:
+	- Doctrine\DBAL\Platforms\MariaDb1052Platform
+
+extensions:
+	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
+	nettrine.dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension
+
+	nettrine.orm: Nettrine\ORM\DI\OrmExtension
+	nettrine.orm.cache: Nettrine\ORM\DI\OrmCacheExtension
+	nettrine.orm.console: Nettrine\ORM\DI\OrmConsoleExtension(%consoleMode%)
+
+	nettrine.cache: Nettrine\Cache\DI\CacheExtension
+	nettrine.annotations: Nettrine\Annotations\DI\AnnotationsExtension
+	nettrine.migrations: Nettrine\Migrations\DI\MigrationsExtension
+	nettrine.fixtures: Nettrine\Fixtures\DI\FixturesExtension
+	orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
+
+orm.annotations:
+	mapping:
+		App\Rally\Domain\Entity: %appDir%/Rally/Domain/Entity
+
+nettrine.orm:
+    configuration:
+        customStringFunctions:
+            FIELD: DoctrineExtensions\Query\Mysql\Field
+
+nettrine.dbal:
+	debug:
+		panel: %debugMode%
+	connection:
+		platform: @Doctrine\DBAL\Platforms\MariaDb1052Platform
+		typesMapping:
+			enum: string
+		host: %default.host%
+		driver: mysqli
+		dbname: %default.dbname%
+		user: %default.user%
+		password: %default.password%
+
+nettrine.migrations:
+	directory: %appDir%/../db/migrations
+
+nettrine.fixtures:
+	paths:
+		- %appDir%/../db/fixtures
