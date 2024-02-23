@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping;
+namespace app\System\Application\Mapping;
 
-use App\System\Domain\Entity\Entity;
+use app\System\Domain\Entity\Entity;
 
 final class CommandEntityMapper extends EntityMapper
 {

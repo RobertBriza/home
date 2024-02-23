@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\CQRS;
+namespace app\System\Application\CQRS;
 
-use App\System\Application\Provider\BusProvider;
+use app\System\Application\Provider\BusProvider;
 
 abstract class BusAccess
 {

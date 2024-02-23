@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Rally\Domain\Entity;
+namespace app\Rally\Domain\Entity;
 
-use App\Rally\Domain\Model\TeamDTO;
-use App\System\Domain\Entity\Entity;
+use app\Rally\Domain\Model\TeamDTO;
+use app\System\Domain\Entity\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Rally\Domain\Repository\TeamRepository")
+ * @ORM\Entity(repositoryClass="app\Rally\Domain\Repository\TeamRepository")
  * @ORM\Table(name="team", uniqueConstraints={
  *       @ORM\UniqueConstraint(name="unique_name", columns={"name"})
  *   })
@@ -26,7 +26,7 @@ class Team extends Entity
 	protected ?int $id;
 	/**
 	 * @ORM\ManyToMany(
-	 *     targetEntity="App\Rally\Domain\Entity\Member",
+	 *     targetEntity="app\Rally\Domain\Entity\Member",
 	 *     inversedBy="teams",
 	 *     cascade={"persist", "remove"}
 	 * )

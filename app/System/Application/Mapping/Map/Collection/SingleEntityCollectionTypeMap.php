@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping\Map\Collection;
+namespace app\System\Application\Mapping\Map\Collection;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

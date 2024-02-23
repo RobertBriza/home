@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\CQRS\Query;
+namespace app\System\Application\CQRS\Query;
 
-use App\System\Application\Mapping\QueryEntityMapper;
-use App\System\Application\Wiring\Autowired;
+use app\System\Application\Mapping\QueryEntityMapper;
+use app\System\Application\Wiring\Autowired;
 use Doctrine\ORM\EntityManagerInterface;
 
 abstract class QueryHandler implements Autowired

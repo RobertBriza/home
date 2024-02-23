@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Rally\Domain\Repository;
+namespace app\Rally\Domain\Repository;
 
-use App\Rally\Domain\Entity\Member;
-use App\Rally\Domain\Enum\MemberType;
-use App\System\Domain\Repository\BaseRepository;
+use app\Rally\Domain\Entity\Member;
+use app\Rally\Domain\Enum\MemberType;
+use app\System\Domain\Repository\BaseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 

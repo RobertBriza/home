@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\System\UI\Http\Web;
+namespace app\System\UI\Http\Web;
 
-use App\Rally\Application\Command\DeleteMember;
-use App\Rally\Application\Command\UpdateMember;
-use App\Rally\Application\Command\UpdateTeam;
-use App\Rally\Domain\Enum\MemberType;
+use app\Rally\Application\Command\DeleteMember;
+use app\Rally\Application\Command\UpdateMember;
+use app\Rally\Application\Command\UpdateTeam;
+use app\Rally\Domain\Enum\MemberType;
 use Nette\Application\Responses\JsonResponse;
 
 class DebugPresenter extends BasePresenter

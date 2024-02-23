@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Rally\Domain\Enum;
+namespace app\Rally\Domain\Enum;
 
 use Exception;
 

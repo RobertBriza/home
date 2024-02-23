@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\System\UI\Http\Web;
+namespace app\System\UI\Http\Web;
 
-use App\System\Application\CQRS\Bus;
-use App\System\Application\Helper\CustomTranslator;
-use App\System\Application\Vite\Vite;
+use app\System\Application\CQRS\Bus;
+use app\System\Application\Helper\CustomTranslator;
+use app\System\Application\Vite\Vite;
 use Contributte;
 use Nette;
 

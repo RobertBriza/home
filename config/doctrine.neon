@@ -17,7 +17,7 @@ extensions:
 
 orm.annotations:
 	mapping:
-		App\Rally\Domain\Entity: %appDir%/Rally/Domain/Entity
+		app\Rally\Domain\Entity: %appDir%/Rally/Domain/Entity
 
 nettrine.orm:
     configuration:

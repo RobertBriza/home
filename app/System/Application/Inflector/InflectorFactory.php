@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Inflector;
+namespace app\System\Application\Inflector;
 
 use Doctrine\Inflector\Inflector;
 

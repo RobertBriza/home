@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\System\UI\Http\Web\Form;
+namespace app\System\UI\Http\Web\Form;
 
 use Nette\Application\UI\Control;
 use Nette\Bridges\ApplicationLatte\DefaultTemplate;

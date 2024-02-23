@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Helper;
+namespace app\System\Application\Helper;
 
 use Nette\Utils\FileSystem;
 use RuntimeException;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping\Map\Collection;
+namespace app\System\Application\Mapping\Map\Collection;
 
-use App\System\Application\Wiring\Autowired;
+use app\System\Application\Wiring\Autowired;
 use Doctrine\Common\Collections\ArrayCollection;
 
 interface CollectionTypeMap extends Autowired

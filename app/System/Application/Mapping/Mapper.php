@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping;
+namespace app\System\Application\Mapping;
 
-use App\System\Application\CQRS\Command\CreateCommand;
-use App\System\Application\CQRS\Command\DeleteCommand;
-use App\System\Application\CQRS\Command\UpdateCommand;
-use App\System\Application\CQRS\Query\Query;
-use App\System\Application\Mapping\Map\TypeMap;
-use App\System\Application\Wiring\Autowired;
-use App\System\Domain\Entity\Entity;
+use app\System\Application\CQRS\Command\CreateCommand;
+use app\System\Application\CQRS\Command\DeleteCommand;
+use app\System\Application\CQRS\Command\UpdateCommand;
+use app\System\Application\CQRS\Query\Query;
+use app\System\Application\Mapping\Map\TypeMap;
+use app\System\Application\Wiring\Autowired;
+use app\System\Domain\Entity\Entity;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Exception;

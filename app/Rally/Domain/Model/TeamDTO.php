@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Rally\Domain\Model;
+namespace app\Rally\Domain\Model;
 
 use Doctrine\Common\Collections\Collection;
 

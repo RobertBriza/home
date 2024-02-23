@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping\Exception;
+namespace app\System\Application\Mapping\Exception;
 
-use App\System\Application\Exception\ApplicationException;
+use app\System\Application\Exception\ApplicationException;
 
 class ResolverException extends ApplicationException
 {

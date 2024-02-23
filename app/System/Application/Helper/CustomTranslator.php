@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Helper;
+namespace app\System\Application\Helper;
 
-use App\System\Application\Wiring\Autowired;
+use app\System\Application\Wiring\Autowired;
 use Contributte\Translation\LocalesResolvers\Session;
 use Nette\Localization\Translator;
 

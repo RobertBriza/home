@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Domain\Repository;
+namespace app\System\Domain\Repository;
 
-use App\System\Domain\Entity\Entity;
+use app\System\Domain\Entity\Entity;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;

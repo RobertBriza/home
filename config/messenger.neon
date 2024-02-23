@@ -19,11 +19,11 @@ messenger:
 services:
 	- Contributte\Messenger\Bus\QueryBus
 	- Contributte\Messenger\Bus\CommandBus
-	- App\System\Application\Provider\BusProvider(@Contributte\Messenger\Bus\CommandBus, @Contributte\Messenger\Bus\QueryBus)
-	- App\System\Application\CQRS\Bus
+	- app\System\Application\Provider\BusProvider(@Contributte\Messenger\Bus\CommandBus, @Contributte\Messenger\Bus\QueryBus)
+	- app\System\Application\CQRS\Bus
 
 decorator:
-	App\System\Application\CQRS\BusAccess:
+	app\System\Application\CQRS\BusAccess:
 		setup:
-			- setBusProvider(@App\System\Application\Provider\BusProvider)
+			- setBusProvider(@app\System\Application\Provider\BusProvider)
 

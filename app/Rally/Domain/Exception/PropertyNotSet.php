@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Rally\Domain\Exception;
+namespace app\Rally\Domain\Exception;
 
 class PropertyNotSet extends DomainException
 {

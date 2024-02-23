@@ -4,13 +4,13 @@ application:
 	errorPresenter: Error
 	catchExceptions: %productionMode%
 	mapping:
-		*: [App, *\UI\Http\Web, *Presenter]
+		*: [app, *\UI\Http\Web, *Presenter]
 
 search:
 	autowired:
 		in: %appDir%
 		implements:
-		- App\System\Application\Wiring\Autowired
+		- app\System\Application\Wiring\Autowired
 
 session:
 	expiration: 14 days
@@ -44,4 +44,4 @@ di:
 
 tracy:
 	bar:
-		- App\System\Application\Vite\VitePanel
+		- app\System\Application\Vite\VitePanel

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping\Map;
+namespace app\System\Application\Mapping\Map;
 
-use App\System\Application\Exception\ApplicationException;
-use App\System\Application\Mapping\Map\Collection\CollectionTypeMap;
-use App\System\Domain\Entity\Entity;
+use app\System\Application\Exception\ApplicationException;
+use app\System\Application\Mapping\Map\Collection\CollectionTypeMap;
+use app\System\Domain\Entity\Entity;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Inflector\Inflector;
 use Doctrine\ORM\EntityManagerInterface;

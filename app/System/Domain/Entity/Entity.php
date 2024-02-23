@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Domain\Entity;
+namespace app\System\Domain\Entity;
 
-use App\Rally\Domain\Exception\PropertyNotSet;
+use app\Rally\Domain\Exception\PropertyNotSet;
 use LogicException;
 
 abstract class Entity

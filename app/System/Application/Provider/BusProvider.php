@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Provider;
+namespace app\System\Application\Provider;
 
 use Contributte\Messenger\Bus\CommandBus;
 use Contributte\Messenger\Bus\QueryBus;

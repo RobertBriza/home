@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping;
+namespace app\System\Application\Mapping;
 
-use App\System\Application\Wiring\Autowired;
+use app\System\Application\Wiring\Autowired;
 
 abstract class EntityMapper implements Autowired
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping;
+namespace app\System\Application\Mapping;
 
-use App\System\Application\Mapping\Exception\ResolverException;
+use app\System\Application\Mapping\Exception\ResolverException;
 use Doctrine\Inflector\Inflector;
 
 final class MapperNameResolver

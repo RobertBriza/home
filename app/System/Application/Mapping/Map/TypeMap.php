@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping\Map;
+namespace app\System\Application\Mapping\Map;
 
-use App\System\Application\Wiring\Autowired;
-use App\System\Domain\Entity\Entity;
+use app\System\Application\Wiring\Autowired;
+use app\System\Domain\Entity\Entity;
 
 interface TypeMap extends Autowired
 {

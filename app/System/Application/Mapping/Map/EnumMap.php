@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\Mapping\Map;
+namespace app\System\Application\Mapping\Map;
 
-use App\System\Domain\Entity\Entity;
+use app\System\Domain\Entity\Entity;
 use ReflectionObject;
 
 class EnumMap implements TypeMap

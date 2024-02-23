@@ -1,16 +1,16 @@
 services:
-	- App\System\Application\Vite\Vite(http://localhost:5173, %wwwDir%/manifest.json, not(%debugMode%))
+	- app\System\Application\Vite\Vite(http://localhost:5173, %wwwDir%/manifest.json, not(%debugMode%))
 	nette.latteFactory:
 			setup:
-					- addFilter(asset, App\System\Application\Latte\AssetFilter())
+					- addFilter(asset, app\System\Application\Latte\AssetFilter())
 
-	- App\System\Application\Routing\Factory\RouterFactory::createRouter
-	- App\System\Application\Helper\TemplateRenderer(@twigEnvironment)
-	- App\System\Application\Mapping\MapperNameResolver(typed(App\System\Application\Mapping\Mapper))
+	- app\System\Application\Routing\Factory\RouterFactory::createRouter
+	- app\System\Application\Helper\TemplateRenderer(@twigEnvironment)
+	- app\System\Application\Mapping\MapperNameResolver(typed(app\System\Application\Mapping\Mapper))
 
-	inflector: App\System\Application\Inflector\InflectorFactory::create()
+	inflector: app\System\Application\Inflector\InflectorFactory::create()
 
-	- App\System\Application\Mapping\Map\CollectionMap(typed(App\System\Application\Mapping\Map\Collection\CollectionTypeMap))
+	- app\System\Application\Mapping\Map\CollectionMap(typed(app\System\Application\Mapping\Map\Collection\CollectionTypeMap))
 
 	configLoader:
 		factory: Twig\Loader\FilesystemLoader(%appDir%/../deploy/local)
@@ -18,16 +18,16 @@ services:
 		factory: Twig\Environment(@configLoader)
 
 decorator:
-	App\System\Application\Mapping\Mapper:
+	app\System\Application\Mapping\Mapper:
 		setup:
-			- setTypeMaps(typed(App\System\Application\Mapping\Map\TypeMap))
+			- setTypeMaps(typed(app\System\Application\Mapping\Map\TypeMap))
 
-	App\System\Application\CQRS\Command\CommandHandler:
+	app\System\Application\CQRS\Command\CommandHandler:
 		setup:
-			- setMapper(@App\System\Application\Mapping\CommandEntityMapper)
+			- setMapper(@app\System\Application\Mapping\CommandEntityMapper)
 			- setEntityManager(@Doctrine\ORM\EntityManagerInterface)
 
-	App\System\Application\CQRS\Query\QueryHandler:
+	app\System\Application\CQRS\Query\QueryHandler:
 		setup:
-			- setMapper(@App\System\Application\Mapping\QueryEntityMapper)
+			- setMapper(@app\System\Application\Mapping\QueryEntityMapper)
 			- setEntityManager(@Doctrine\ORM\EntityManagerInterface)

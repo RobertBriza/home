@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\System\UI\Cli;
+namespace app\System\UI\Cli;
 
-use App\System\Application\Helper\TemplateRenderer;
-use App\System\Application\Wiring\Autowired;
+use app\System\Application\Helper\TemplateRenderer;
+use app\System\Application\Wiring\Autowired;
 use Dotenv\Dotenv;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

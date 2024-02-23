@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace app;
 
-use App\System\Application\Helper\TemplateRenderer;
+use app\System\Application\Helper\TemplateRenderer;
 use Dotenv\Dotenv;
 use Nette\Bootstrap\Configurator;
 use RuntimeException;

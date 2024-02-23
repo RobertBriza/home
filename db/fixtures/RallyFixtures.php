@@ -2,9 +2,9 @@
 
 namespace db\fixtures;
 
-use App\Rally\Domain\Entity\Member;
-use App\Rally\Domain\Entity\Team;
-use App\Rally\Domain\Enum\MemberType;
+use app\Rally\Domain\Entity\Member;
+use app\Rally\Domain\Entity\Team;
+use app\Rally\Domain\Enum\MemberType;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Persistence\ObjectManager;
 

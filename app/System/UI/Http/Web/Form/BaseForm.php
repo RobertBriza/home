@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\System\UI\Http\Web\Form;
+namespace app\System\UI\Http\Web\Form;
 
 use Exception;
 use Nette\Application\UI\Form;

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\System\Application\Vite;
+declare(strict_types=1);
+
+namespace app\System\Application\Vite;
 
 use Nette\Http\Request;
 use Nette\Utils\FileSystem;
@@ -33,7 +35,6 @@ class Vite
 			} else {
 				trigger_error('Missing manifest file: ' . $this->manifestFile, E_USER_WARNING);
 			}
-
 		} else {
 			$baseUrl = $this->viteServer . '/';
 			$asset = $entrypoint;
@@ -59,7 +60,6 @@ class Vite
 			} else {
 				trigger_error('Missing manifest file: ' . $this->manifestFile, E_USER_WARNING);
 			}
-
 		}
 
 		return $assets;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\CQRS\Query;
+namespace app\System\Application\CQRS\Query;
 
 abstract class GetByQuery extends Query
 {

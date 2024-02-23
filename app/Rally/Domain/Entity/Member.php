@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Rally\Domain\Entity;
+namespace app\Rally\Domain\Entity;
 
-use App\Rally\Domain\Enum\MemberType;
-use App\Rally\Domain\Model\MemberDTO;
-use App\System\Domain\Entity\Entity;
+use app\Rally\Domain\Enum\MemberType;
+use app\Rally\Domain\Model\MemberDTO;
+use app\System\Domain\Entity\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Rally\Domain\Repository\MemberRepository")
+ * @ORM\Entity(repositoryClass="app\Rally\Domain\Repository\MemberRepository")
  * @ORM\Table(name="member", uniqueConstraints={
  *      @ORM\UniqueConstraint(name="unique_firstname_lastname", columns={"first_name", "last_name"})
  *  })
@@ -35,7 +35,7 @@ class Member extends Entity
 	private string $lastName;
 	/**
 	 * @ORM\ManyToMany(
-	 *     targetEntity="App\Rally\Domain\Entity\Team",
+	 *     targetEntity="app\Rally\Domain\Entity\Team",
 	 *     mappedBy="members",
 	 *     cascade={"persist", "remove"}
 	 * )

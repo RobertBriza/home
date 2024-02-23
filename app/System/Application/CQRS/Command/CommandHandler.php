@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\System\Application\CQRS\Command;
+namespace app\System\Application\CQRS\Command;
 
-use App\System\Application\Mapping\CommandEntityMapper;
-use App\System\Application\Wiring\Autowired;
+use app\System\Application\Mapping\CommandEntityMapper;
+use app\System\Application\Wiring\Autowired;
 use Doctrine\ORM\EntityManagerInterface;
 
 abstract class CommandHandler implements Autowired

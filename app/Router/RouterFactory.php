@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Router;
+namespace app\Router;
 
 use Nette;
 use Nette\Application\Routers\RouteList;
-
 
 final class RouterFactory
 {
@@ -14,7 +13,7 @@ final class RouterFactory
 
 	public static function createRouter(): RouteList
 	{
-		$router = new RouteList;
+		$router = new RouteList();
 		$router->addRoute('<presenter>/<action>[/<id>]', 'Homepage:default');
 		return $router;
 	}

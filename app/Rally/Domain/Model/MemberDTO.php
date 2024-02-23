@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Rally\Domain\Model;
+namespace app\Rally\Domain\Model;
 
-use App\Rally\Domain\Enum\MemberType;
+use app\Rally\Domain\Enum\MemberType;
 
 readonly class MemberDTO
 {
