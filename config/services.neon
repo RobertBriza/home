@@ -1,21 +1,25 @@
 services:
 	- app\System\Application\Vite\Vite(http://localhost:5173, %wwwDir%/manifest.json, not(%debugMode%))
-	nette.latteFactory:
-			setup:
-					- addFilter(asset, app\System\Application\Latte\AssetFilter())
-
 	- app\System\Application\Routing\Factory\RouterFactory::createRouter
 	- app\System\Application\Helper\TemplateRenderer(@twigEnvironment)
 	- app\System\Application\Mapping\MapperNameResolver(typed(app\System\Application\Mapping\Mapper))
+	- app\System\Application\Mapping\Map\CollectionMap(typed(app\System\Application\Mapping\Map\Collection\CollectionTypeMap))
+	- app\Nameday\Infrastructure\DayInfoProvider(app\Day\Infrastructure\DayInfoClient::create())
+
 
 	inflector: app\System\Application\Inflector\InflectorFactory::create()
-
-	- app\System\Application\Mapping\Map\CollectionMap(typed(app\System\Application\Mapping\Map\Collection\CollectionTypeMap))
-
 	configLoader:
 		factory: Twig\Loader\FilesystemLoader(%appDir%/../deploy/local)
 	twigEnvironment:
 		factory: Twig\Environment(@configLoader)
+	nette.latteFactory:
+			setup:
+					- addFilter(asset, app\System\Application\Latte\AssetFilter())
+
+	localStorage:
+		create: Nette\Caching\Storages\FileStorage(%tempDir%/cache)
+		autowired: false
+	- Nette\Caching\Cache(@localStorage, 'local-cache')
 
 decorator:
 	app\System\Application\Mapping\Mapper:
