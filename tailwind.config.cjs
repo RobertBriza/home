@@ -13,7 +13,15 @@ module.exports = {
       lg: '976px',
       xl: '1440px',
     },
-    extend: {},
+    extend: {
+      container: {
+        center: true,
+        screens: {
+          lg: '800px',
+          xl: '800px',
+        },
+      },
+    },
   },
   plugins: [],
 }

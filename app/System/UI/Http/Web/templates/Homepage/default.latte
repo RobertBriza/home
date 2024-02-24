@@ -1,79 +1,44 @@
 {templateType app\System\UI\Http\Web\Template\BaseTemplate}
 {block content}
-	<div class="container flex-1 overflow-hidden"> <!-- Content area that grows with flex-1 -->
-		<div class="px-2 h-36 flex flex-col"> <!-- Inner content wrapper with vertical flex layout -->
-			<div class="grid grid-cols-4 gap-3 flex-1 mt-3"> <!-- Grid takes up the flexible space -->
-				<div class="col-span-1 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
-				<div class="col-span-2 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
-				<div class="col-span-1 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"> <!-- Centering content -->
-					{$dayInfoDTO->dayNumber}. {$dayInfoDTO->month['genitive']} {$dayInfoDTO->year}
-				</div>
-			</div>
-			<div class="grid grid-cols-7 gap-3 flex-1 mt-3">
-				{foreach $dayInfoDTO->last7Days() as $day}
-					<div class="bg-gray-700 p-3 rounded-lg flex flex-col items-center">
-						<div>8/8</div>
-						<div>{$day->format('m.d.')}</div>
-					</div>
-				{/foreach}
-			</div>
-			<div class="bg-slate-700 p-3 mt-3 w-1/2 flex flex-col items-center self-center justify-center rounded-lg">
-				<span>Hodnocení dne</span>
-				<form class="w-full max-w-lg">
-					<div class="flex flex-wrap justify-center -mx-3 mb-2">
-						<div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-							<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="eval-1">
-								Hodnocení 1
-							</label>
-							<div class="relative">
-								<select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="eval-1">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-									<option>6</option>
-									<option>7</option>
-									<option>8</option>
-									<option>9</option>
-									<option>10</option>
-								</select>
-								<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-									<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-								</div>
-							</div>
-						</div>
-						<div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
-							<label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="eval-2">
-								Hodnocení 2
-							</label>
-							<div class="relative">
-								<select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="eval-2">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-									<option>6</option>
-									<option>7</option>
-									<option>8</option>
-									<option>9</option>
-									<option>10</option>
-								</select>
-								<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-									<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="flex justify-center mt-3">
-						<div class="w-full flex justify-center">
-							<button class="shadow bg-slate-800 hover:bg-slate-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-								Uložit
-							</button>
-						</div>
-					</div>
-				</form>
+
+<div class="container flex-1 overflow-hidden"> <!-- Content area that grows with flex-1 -->
+	<div class="px-2 h-36 flex flex-col"> <!-- Inner content wrapper with vertical flex layout -->
+		<div class="grid grid-cols-4 gap-3 flex-1 mt-3"> <!-- Grid takes up the flexible space -->
+			<div class="col-span-1 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
+			<div class="col-span-2 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
+			<div class="col-span-1 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"> <!-- Centering content -->
+				{$dayInfoDTO->dayNumber}. {$dayInfoDTO->month['genitive']} {$dayInfoDTO->year}
 			</div>
 		</div>
+		<div class="grid grid-cols-7 gap-3 flex-1 mt-3">
+			{foreach $dayInfoDTO->last7Days() as $day}
+				<div class="bg-gray-700 p-3 rounded-lg flex flex-col items-center">
+					<div>8/8</div>
+					<div>{$day->format('m.d.')}</div>
+				</div>
+			{/foreach}
+		</div>
+		<div class="bg-slate-700 p-3 mt-3 w-1/2 flex flex-col items-center self-center justify-center rounded-lg">
+			<span>Hodnocení dne</span>
+			<form n:name=dayScore class="flex flex-col items-center justify-center">
+				<div class="grid grid-cols-2 mt-3 gap-3">
+					<div>
+						<label n:name=score2>
+							<select n:name=score1 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded focus:outline-none"></select>
+						</label>
+					</div>
+					<div>
+						<label n:name=score2>
+							<select n:name=score2 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded focus:outline-none"></select>
+						</label>
+					</div>
+				</div>
+				<div>
+					<label>
+						<input n:name=send class="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 cursor-pointer">
+					</label>
+				</div>
+			</form>
+		</div>
 	</div>
+</div>
