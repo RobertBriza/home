@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Nameday\Domain;
+namespace app\Day\Domain;
 
 use DateTimeImmutable;
 

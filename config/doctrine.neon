@@ -1,6 +1,10 @@
 services:
 	- Doctrine\DBAL\Platforms\MariaDb1052Platform
 
+	-
+		class: \app\Score\Domain\Repository\ScoreRepository
+		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\Score\Domain\Entity\Score)
+
 extensions:
 	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
 	nettrine.dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension
@@ -17,6 +21,7 @@ extensions:
 
 orm.annotations:
 	mapping:
+		app\Score\Domain\Entity: %appDir%/Score/Domain/Entity
 		app\Rally\Domain\Entity: %appDir%/Rally/Domain/Entity
 
 nettrine.orm:

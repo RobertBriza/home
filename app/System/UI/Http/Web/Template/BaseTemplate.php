@@ -2,7 +2,7 @@
 
 namespace app\System\UI\Http\Web\Template;
 
-use app\Nameday\Domain\DayInfoDTO;
+use app\Day\Domain\DayInfoDTO;
 use app\System\Application\Vite\Vite;
 use Nette\Bridges\ApplicationLatte\Template;
 

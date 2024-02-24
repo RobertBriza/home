@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Nameday\Infrastructure;
+namespace app\Day\Infrastructure;
 
-use app\Nameday\Domain\DayInfoDTO;
+use app\Day\Domain\DayInfoDTO;
 use app\System\Application\Wiring\Autowired;
 use DateTimeImmutable;
 use GuzzleHttp\Client;

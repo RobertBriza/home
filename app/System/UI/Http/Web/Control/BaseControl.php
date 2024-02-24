@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace app\System\UI\Http\Web\Form;
+namespace app\System\UI\Http\Web\Control;
 
+use app\System\Application\CQRS\CQRS;
+use app\System\Application\CQRS\CQRSAble;
 use Nette\Application\UI\Control;
 use Nette\Bridges\ApplicationLatte\DefaultTemplate;
 use Nette\FileNotFoundException;
@@ -12,12 +14,14 @@ use ReflectionClass;
 /**
  * @property DefaultTemplate $template
  */
-abstract class BaseControl extends Control
+abstract class BaseControl extends Control implements CQRSAble
 {
+	use CQRS;
+
 	public function render(mixed ...$args): void
 	{
 		if ($args) {
-			dumpe($args);
+			//TODO: arguments
 		}
 
 		$this->prepareTemplate();

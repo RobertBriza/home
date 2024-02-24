@@ -4,7 +4,7 @@ services:
 	- app\System\Application\Helper\TemplateRenderer(@twigEnvironment)
 	- app\System\Application\Mapping\MapperNameResolver(typed(app\System\Application\Mapping\Mapper))
 	- app\System\Application\Mapping\Map\CollectionMap(typed(app\System\Application\Mapping\Map\Collection\CollectionTypeMap))
-	- app\Nameday\Infrastructure\DayInfoProvider(app\Day\Infrastructure\DayInfoClient::create())
+	- app\Day\Infrastructure\DayInfoProvider(app\Day\Infrastructure\DayInfoClient::create())
 
 
 	inflector: app\System\Application\Inflector\InflectorFactory::create()
@@ -35,3 +35,8 @@ decorator:
 		setup:
 			- setMapper(@app\System\Application\Mapping\QueryEntityMapper)
 			- setEntityManager(@Doctrine\ORM\EntityManagerInterface)
+
+	app\System\UI\Http\Web\BasePresenter:
+		setup:
+			- setDayInfoProvider(@app\Day\Infrastructure\DayInfoProvider)
+			- setVite(@app\System\Application\Vite\Vite)

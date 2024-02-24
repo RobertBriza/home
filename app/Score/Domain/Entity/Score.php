@@ -38,6 +38,16 @@ class Score extends Entity
 
 	}
 
+	public function getCreatedAt(): DateTimeImmutable
+	{
+		return $this->createdAt;
+	}
+
+	public function setCreatedAt(DateTimeImmutable $createdAt): void
+	{
+		$this->createdAt = $createdAt;
+	}
+
 	public function getId(): int
 	{
 		return $this->id;

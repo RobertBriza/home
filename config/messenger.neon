@@ -20,10 +20,8 @@ services:
 	- Contributte\Messenger\Bus\QueryBus
 	- Contributte\Messenger\Bus\CommandBus
 	- app\System\Application\Provider\BusProvider(@Contributte\Messenger\Bus\CommandBus, @Contributte\Messenger\Bus\QueryBus)
-	- app\System\Application\CQRS\Bus
 
 decorator:
-	app\System\Application\CQRS\BusAccess:
+	\app\System\Application\CQRS\CQRSAble:
 		setup:
 			- setBusProvider(@app\System\Application\Provider\BusProvider)
-

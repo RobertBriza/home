@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace app\System\UI\Http\Web;
 
-use app\Nameday\Infrastructure\DayInfoProvider;
-use app\System\Application\CQRS\Bus;
+use app\Day\Infrastructure\DayInfoProvider;
+use app\System\Application\CQRS\CQRS;
+use app\System\Application\CQRS\CQRSAble;
 use app\System\Application\Helper\CustomTranslator;
 use app\System\Application\Vite\Vite;
 use app\System\UI\Http\Web\Template\BaseTemplate;
@@ -16,19 +17,16 @@ use Nette;
 /**
  * @property-read BaseTemplate $template
  */
-abstract class BasePresenter extends Nette\Application\UI\Presenter
+abstract class BasePresenter extends Nette\Application\UI\Presenter implements CQRSAble
 {
+	use CQRS;
+
 	/** @inject */
 	public CustomTranslator $t;
 	/** @inject */
 	public Contributte\Translation\LocalesResolvers\Session $translatorSessionResolver;
-
-	public function __construct(
-		protected Bus $bus,
-		private Vite $vite,
-		private DayInfoProvider $dayInfoProvider,
-	) {
-	}
+	protected DayInfoProvider $dayInfoProvider;
+	protected Vite $vite;
 
 	public function beforeRender(): void
 	{
@@ -44,6 +42,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
 		$this->translatorSessionResolver->setLocale($locale);
 		$this->redirect('this');
+	}
+
+	public function setDayInfoProvider(DayInfoProvider $dayInfoProvider): void
+	{
+		$this->dayInfoProvider = $dayInfoProvider;
+	}
+
+	public function setVite(Vite $vite): void
+	{
+		$this->vite = $vite;
 	}
 
 	protected function startup(): void
