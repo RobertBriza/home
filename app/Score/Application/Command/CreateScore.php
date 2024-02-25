@@ -9,7 +9,7 @@ use DateTimeImmutable;
 
 final class CreateScore extends CreateCommand
 {
-	public function __construct(public int $score1, public $score2, DateTimeImmutable $createdAt)
+	public function __construct(public int $score1, public int $score2, public DateTimeImmutable $createdAt)
 	{
 	}
 }

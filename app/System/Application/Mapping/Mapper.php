@@ -117,7 +117,7 @@ abstract class Mapper implements Autowired
 			$type = $property->getType();
 
 			if ($type instanceof ReflectionNamedType === false) {
-				continue;
+				throw new \ReflectionException('Property type not found');
 			}
 
 			$properties[$property->name] = $type->getName();
