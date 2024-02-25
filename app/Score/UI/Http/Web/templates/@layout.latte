@@ -15,7 +15,7 @@
 
 <body data-controller="body">
 	<div class="flex flex-col h-screen bg-slate-800 text-white">
-		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+		<div n:flashes></div>
 		{include header.latte}
 		{include content}
 		{include footer.latte}

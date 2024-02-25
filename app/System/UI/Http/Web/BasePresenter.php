@@ -12,12 +12,12 @@ use app\System\Application\Vite\Vite;
 use app\System\UI\Http\Web\Template\BaseTemplate;
 use Contributte;
 use DateTimeImmutable;
-use Nette;
+use Nittro\Bridges\NittroUI\Presenter;
 
 /**
  * @property-read BaseTemplate $template
  */
-abstract class BasePresenter extends Nette\Application\UI\Presenter implements CQRSAble
+abstract class BasePresenter extends Presenter implements CQRSAble
 {
 	use CQRS;
 

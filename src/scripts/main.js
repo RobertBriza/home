@@ -1,7 +1,8 @@
 import "/src/styles/main.css"
-
-import { Application, Controller } from '@hotwired/stimulus'
+import "/src/scripts/nittro/nittro.min.js"
+import {Application, Controller} from '@hotwired/stimulus'
 import "@hotwired/turbo"
+
 
 const LibStimulus = new Application(document.documentElement)
 
