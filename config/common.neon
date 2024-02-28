@@ -19,7 +19,6 @@ extensions:
 	resources: Contributte\DI\Extension\ResourceExtension
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
 	translation: Contributte\Translation\DI\TranslationExtension
-	- Nittro\Bridges\NittroDI\NittroExtension
 
 translation:
 	localeResolvers:

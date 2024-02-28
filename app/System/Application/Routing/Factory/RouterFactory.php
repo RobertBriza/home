@@ -16,6 +16,7 @@ final class RouterFactory
 		$router = new RouteList();
 
 		$router->addRoute('/', 'Score:Score:default');
+		$router->addRoute('/test', 'System:Homepage:default');
 
 		$router->addRoute('<module>/<presenter>/<action>[/<id>]');
 

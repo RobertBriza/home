@@ -12,7 +12,7 @@ use app\System\Application\Vite\Vite;
 use app\System\UI\Http\Web\Template\BaseTemplate;
 use Contributte;
 use DateTimeImmutable;
-use Nittro\Bridges\NittroUI\Presenter;
+use Nette\Application\UI\Presenter;
 
 /**
  * @property-read BaseTemplate $template
@@ -32,6 +32,9 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 	{
 		$this->template->dayInfoDTO = $this->dayInfoProvider->get(new DateTimeImmutable());
 		$this->template->vite = $this->vite;
+
+		$this->redrawControl('title');
+		$this->redrawControl('content');
 	}
 
 	public function handleChangeLocale(): void

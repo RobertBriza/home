@@ -1,8 +1,11 @@
 import "/src/styles/main.css"
-import "/src/scripts/nittro/nittro.min.js"
 import {Application, Controller} from '@hotwired/stimulus'
 import "@hotwired/turbo"
+import naja from "naja"
 
+
+naja.uiHandler.selector = ':not(.noajax)'
+naja.initialize()
 
 const LibStimulus = new Application(document.documentElement)
 

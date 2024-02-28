@@ -4,27 +4,24 @@ declare(strict_types=1);
 
 namespace app\Score\UI\Http\Web;
 
+use app\Score\Application\Query\GetScore;
+use app\Score\Domain\Entity\Score;
 use app\Score\UI\Http\Web\Control\DailyScoreControlFactory;
 use app\System\UI\Http\Web\BasePresenter;
-use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
-use Nette\Utils\ArrayHash;
 
 class ScorePresenter extends BasePresenter
 {
+	public Score $score;
+
 	public function __construct(private DailyScoreControlFactory $controlFactory)
 	{
 	}
 
-	public function beforeRender(): void
+	public function render(): void
 	{
-		parent::beforeRender();
-	}
-
-	public function formSucceeded(Form $form, ArrayHash $values): void
-	{
-		$this->flashMessage('Skóre uloženo.');
-		$this->redirect('this');
+		$this->score = $this->sendQuery(new GetScore());
+		$this->template->score = $this->score;
 	}
 
 	protected function createComponentDailyScore(): IComponent

@@ -1,23 +1,24 @@
-{templateType app\System\UI\Http\Web\Template\BaseTemplate}
-{block content}
+{layout ../../../../../../System/UI/Http/Web/templates/@layout.latte}
+{varType app\Day\Domain\DayInfoDTO $dayInfoDTO}
 
-<div class="container flex-1 overflow-hidden"> <!-- Content area that grows with flex-1 -->
-	<div class="px-2 h-36 flex flex-col"> <!-- Inner content wrapper with vertical flex layout -->
-		<div class="grid grid-cols-4 gap-3 flex-1 mt-3"> <!-- Grid takes up the flexible space -->
-			<div class="col-span-1 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
-			<div class="col-span-2 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
-			<div class="col-span-1 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"> <!-- Centering content -->
-				{$dayInfoDTO->dayNumber}. {$dayInfoDTO->month['genitive']} {$dayInfoDTO->year}
-			</div>
+{templateType app\System\UI\Http\Web\Template\BaseTemplate}
+{block title}Hodnocení dne{/block}
+
+{block content}
+<div class="px-2 h-36 flex flex-col">
+	<div class="grid grid-cols-4 gap-3 flex-1 mt-3">
+		<div class="col-span-1 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
+		<div class="col-span-2 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
+		<div class="col-span-1 bg-gray-700 p-3 overflow-auto flex items-center justify-center rounded-lg">
+			{$dayInfoDTO->dayNumber}. {$dayInfoDTO->month['genitive']} {$dayInfoDTO->year}
 		</div>
-		<div class="grid grid-cols-7 gap-3 flex-1 mt-3">
-			{foreach $dayInfoDTO->last7Days() as $day}
-				<div class="bg-gray-700 p-3 rounded-lg flex flex-col items-center hover:bg-gray-500 transition-all duration-300">
-					<div>8/8</div>
-					<div>{$day->format('m.d.')}</div>
-				</div>
-			{/foreach}
-		</div>
-		{control dailyScore}
 	</div>
+	<div class="grid grid-cols-7 gap-3 flex-1 mt-3">
+		{foreach $dayInfoDTO->last7Days() as $day}
+			<div class="bg-gray-700 p-3 rounded-lg flex flex-col items-center hover:bg-gray-500 transition-all duration-300">
+				<div>{$day->format('m.d.')}</div>
+			</div>
+		{/foreach}
+	</div>
+	{control dailyScore}
 </div>
