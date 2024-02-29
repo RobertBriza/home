@@ -30,7 +30,8 @@ class DailyScoreControl extends BaseControl
 	public function handleDelete(int $id): void
 	{
 		$this->sendCommand(new DeleteScore($id));
-		$this->redirect('this');
+		$this->flashMessage("Flash");
+		$this->redrawControl();
 	}
 
 	public function render(mixed ...$args): void

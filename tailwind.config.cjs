@@ -14,6 +14,15 @@ module.exports = {
       xl: '1440px',
     },
     extend: {
+      animation: {
+        fade: 'fadeOut 3s ease-in-out',
+      },
+      keyframes: theme => ({
+        fadeOut: {
+          '0%': { backgroundColor: theme('colors.slate.700') },
+          '100%': { backgroundColor: theme('colors.transparent') },
+        },
+      }),
       container: {
         center: true,
         screens: {

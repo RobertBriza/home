@@ -26,6 +26,8 @@ class ScorePresenter extends BasePresenter
 
 	protected function createComponentDailyScore(): IComponent
 	{
+		$this->flashMessage("yes");
+
 		return $this->controlFactory->create();
 	}
 }

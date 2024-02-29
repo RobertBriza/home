@@ -1,6 +1,6 @@
 {varType app\Score\Domain\Entity\Score $score}
 <div class="bg-slate-700 p-3 mt-3 w-1/2 flex flex-col items-center self-center justify-center rounded-lg">
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
 	{if $score === null}
 		<form n:name=scoreForm class="flex flex-col items-center justify-center" data-naja-history="off">
 			<div class="grid grid-cols-1 gap-3 my-16">
@@ -43,8 +43,8 @@
 		<div class="mt-9 mb-[20px]">
 			<a
 							n:href="delete! $score->getId()"
-							data-naja-history="replace"
-							class="text-white bg-slate-800 font-bold rounded hover:bg-slate-900 cursor-pointer py-5 px-10"
+							data-naja-history="off"
+							class="ajax text-white bg-slate-800 font-bold rounded hover:bg-slate-900 cursor-pointer py-5 px-10"
 			>
 				Delete
 			</a>

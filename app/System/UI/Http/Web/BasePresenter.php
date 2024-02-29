@@ -35,6 +35,7 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 
 		$this->redrawControl('title');
 		$this->redrawControl('content');
+		$this->redrawControl('flashes');
 	}
 
 	public function handleChangeLocale(): void
