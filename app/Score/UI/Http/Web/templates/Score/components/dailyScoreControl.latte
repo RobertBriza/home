@@ -9,7 +9,7 @@
 							<select n:name=score1 class="rounded-lg block w-full border-4 text-slate-800 text-2xl border-slate-800 bg-slate-700 hover:bg-slate-800 text-center p-5"></select>
 						</label>
 					</div>
-					<div class="ml-6 text-9xl text-slate-800">
+					<div class="ml-7 text-9xl text-slate-800">
 						<p>/</p>
 					</div>
 					<div class="pt-10">
@@ -31,7 +31,7 @@
 				<div class="rounded-lg block w-full text-6xl text-slate-800 text-center pt-10">
 					<p>{$score->getScore1()}</p>
 				</div>
-				<div class="ml-6 text-9xl text-slate-800 pr-[34px]">
+				<div class="ml-8 text-9xl text-slate-800 pr-[34px]">
 					<p>/</p>
 				</div>
 				<div class="rounded-lg block w-full text-6xl text-slate-800 text-center pt-10">
@@ -41,9 +41,9 @@
 		</div>
 		<div class="mt-9 mb-[20px]">
 			<a
-							n:href="delete! $score->getId()"
-							data-naja-history="off"
-							class="ajax text-white bg-slate-800 font-bold rounded hover:bg-slate-900 cursor-pointer py-5 px-10"
+					n:href="delete! $score->getId()"
+					data-naja-history="off"
+					class="ajax text-white bg-slate-800 font-bold rounded hover:bg-slate-900 cursor-pointer py-5 px-10"
 			>
 				Delete
 			</a>

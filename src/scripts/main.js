@@ -2,12 +2,12 @@ import "/src/styles/main.css"
 import {Application, Controller} from '@hotwired/stimulus'
 import "@hotwired/turbo"
 import naja from "naja"
-import {SpinnerExtension} from './spinner';
+import {SpinnerExtension} from './spinner'
 
 
 naja.uiHandler.selector = ':not(.noajax)'
 naja.initialize()
-naja.registerExtension(new SpinnerExtension('.mainContent'));
+naja.registerExtension(new SpinnerExtension('.mainContent'))
 naja.addEventListener('error', (event) => {
   const error = event.detail.error
 
