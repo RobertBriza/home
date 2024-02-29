@@ -15,12 +15,12 @@ module.exports = {
     },
     extend: {
       animation: {
-        fade: 'fadeOut 3s ease-in-out',
+        fade: 'fadeOut 1s ease-in-out',
       },
       keyframes: theme => ({
         fadeOut: {
-          '0%': { backgroundColor: theme('colors.slate.700') },
-          '100%': { backgroundColor: theme('colors.transparent') },
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
         },
       }),
       container: {

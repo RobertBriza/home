@@ -16,10 +16,10 @@
 <body data-controller="body">
 	<div class="flex flex-col h-screen bg-slate-800 text-white">
 		{include header.latte}
-		<div n:snippet="flashes">
+		<div n:snippet="flashes" class="fixed top-16 left-0 w-full z-50" data-naja-snippet-append>
 			{include flashes.latte}
 		</div>
-		<div n:inner-block="content" n:snippet="content" class="container flex-1 overflow-hidden"></div>
+		<div n:inner-block="content" n:snippet="content" class="container mainContent flex-1 overflow-hidden"></div>
 		{include footer.latte}
 	</div>
 	{block scripts}{/block}
