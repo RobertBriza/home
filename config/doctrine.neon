@@ -23,6 +23,7 @@ orm.annotations:
 	mapping:
 		app\Score\Domain\Entity: %appDir%/Score/Domain/Entity
 		app\Rally\Domain\Entity: %appDir%/Rally/Domain/Entity
+		app\Day\Domain\Entity: %appDir%/Day/Domain/Entity
 
 nettrine.orm:
     configuration:

@@ -33,11 +33,6 @@ class Score extends Entity
 	 */
 	private int $score2;
 
-	public function __construct()
-	{
-
-	}
-
 	public function getCreatedAt(): DateTimeImmutable
 	{
 		return $this->createdAt;
@@ -46,11 +41,6 @@ class Score extends Entity
 	public function setCreatedAt(DateTimeImmutable $createdAt): void
 	{
 		$this->createdAt = $createdAt;
-	}
-
-	public function getId(): int
-	{
-		return $this->id;
 	}
 
 	public function getScore1(): int
