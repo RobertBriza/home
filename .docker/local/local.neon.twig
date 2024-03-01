@@ -1,0 +1,7 @@
+parameters:
+    default:
+        host: "{{ MYSQL_HOST }}"
+        dbname: "{{ MYSQL_DATABASE }}"
+        user: "{{ MYSQL_USER }}"
+        password: "{{ MYSQL_PASSWORD }}"
+    production_mode: {{ PRODUCTION_MODE ? true : false }}

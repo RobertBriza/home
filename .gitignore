@@ -1,6 +1,5 @@
 .DS_Store
 .idea
-.docker
 .env
 vendor
 node_modules
