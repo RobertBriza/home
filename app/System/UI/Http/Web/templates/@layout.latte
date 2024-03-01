@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width">
 
 	<title n:snippet="title" n:inner-block="title">Nette Web</title>
-	{if $vite->isEnabled()}
+	{if $vite !== null && $vite->isEnabled()}
 		<script type="module" src="{='@vite/client'|asset}"></script>
 	{/if}
 

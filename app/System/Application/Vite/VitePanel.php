@@ -15,6 +15,6 @@ class VitePanel implements IBarPanel
 
 	public function getTab()
 	{
-		//return file_get_contents(__DIR__ . '/Vite.html');
+		return file_get_contents(__DIR__ . '/Vite.html');
 	}
 }

@@ -8,7 +8,12 @@
 <div class="px-2 h-36 flex flex-col">
 	<div class="grid grid-cols-4 gap-3 flex-1 mt-3">
 		<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
-		<div class="col-span-2 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
+		<div class="flex col-span-2 bg-slate-700 p-3 overflow-auto justify-between rounded-lg">
+			<a class="flex-1 flex justify-center">Rok</a>
+			<a class="flex-1 flex justify-center">Měsíc</a>
+			<a class="flex-1 flex justify-center">Týden</a>
+			<a class="flex-1 flex justify-center">Den</a>
+		</div>
 		<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg">
 			{$dayInfoDTO->dayNumber}. {$dayInfoDTO->month['genitive']} {$dayInfoDTO->year}
 		</div>

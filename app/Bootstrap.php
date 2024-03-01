@@ -22,7 +22,12 @@ class Bootstrap
 		$dotenv = Dotenv::createImmutable($appDir);
 		$dotenv->load();
 
-		$configurator->setDebugMode(! $_ENV['PRODUCTION_MODE']);
+		$configurator->setDebugMode((bool) $_ENV['PRODUCTION_MODE'] === false);
+
+		if (isset($_COOKIE['nette-debug']) && $_COOKIE['nette-debug'] === '1') {
+			$configurator->setDebugMode(true);
+		}
+
 		$configurator->enableTracy($appDir . '/log');
 
 		error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_WARNING);

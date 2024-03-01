@@ -1,7 +1,7 @@
 parameters:
 
 application:
-	errorPresenter: Error
+	errorPresenter: Error:Error
 	catchExceptions: %productionMode%
 	mapping:
 		*: [app, *\UI\Http\Web, *Presenter]
