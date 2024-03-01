@@ -15,4 +15,8 @@ php bin/console doctrine:fixtures:load --no-interaction
 
 echo "Done!"
 
+cron
+
+echo "Cron up!"
+
 docker-php-entrypoint $@

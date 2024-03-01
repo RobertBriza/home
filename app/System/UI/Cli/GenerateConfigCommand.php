@@ -31,6 +31,7 @@ class GenerateConfigCommand extends Command implements Autowired
 
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
+		$output->writeln('<info>Generating config files</info>');
 		$dotenv = Dotenv::createImmutable(__DIR__ . '/../../../../');
 		$dotenv->load();
 
