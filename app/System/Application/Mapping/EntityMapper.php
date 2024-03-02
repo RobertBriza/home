@@ -22,8 +22,8 @@ abstract class EntityMapper implements Autowired
 
 	public function map(object $object): mixed
 	{
-		return $this->commandToEntity($this->nameResolver->getMapper($object), $object);
+		return $this->cqrsObjectToEntity($this->nameResolver->getMapper($object), $object);
 	}
 
-	abstract protected function commandToEntity(Mapper $mapper, object $object): mixed;
+	abstract protected function cqrsObjectToEntity(Mapper $mapper, object $object): mixed;
 }

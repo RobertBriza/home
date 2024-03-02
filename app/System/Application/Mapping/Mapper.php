@@ -8,6 +8,7 @@ use app\System\Application\CQRS\Command\CreateCommand;
 use app\System\Application\CQRS\Command\DeleteCommand;
 use app\System\Application\CQRS\Command\UpdateCommand;
 use app\System\Application\CQRS\Query\Query;
+use app\System\Application\Exception\ApplicationException;
 use app\System\Application\Mapping\Map\TypeMap;
 use app\System\Application\Wiring\Autowired;
 use app\System\Domain\Entity\Entity;
@@ -74,8 +75,19 @@ abstract class Mapper implements Autowired
 
 	public function queryToEntity(object $query): mixed
 	{
+		//TODO: getBy
 		if ($query instanceof Query) {
-			return $this->repository->findBy($query->findCriteria());
+			$result = $this->repository->findBy($query->findCriteria());
+
+			if ($result === []) {
+				return null;
+			}
+
+			if (count($result) === 1) {
+				return $result[0];
+			}
+
+			return $result;
 		}
 
 		throw new Exception('Query type not found');
@@ -111,6 +123,7 @@ abstract class Mapper implements Autowired
 	private function getProperties(object $class): array
 	{
 		$reflectedClass = new ReflectionClass($class);
+
 		$properties = [];
 
 		foreach ($reflectedClass->getProperties() as $property) {
@@ -129,6 +142,14 @@ abstract class Mapper implements Autowired
 	/** @return array<string, array{type: string, value: mixed}> */
 	private function mapCommandToEntity(object $command, mixed $entity): array
 	{
+		$hasDTO = isset($command->dto);
+
+		if ($command instanceof CreateCommand === false && $hasDTO) {
+			throw new ApplicationException('DTO is supported only for CreateCommand');
+		}
+
+		$command = $hasDTO ? $command->dto : $command;
+
 		$commandProperties = $this->getProperties($command);
 		$entityProperties = $this->getProperties($entity);
 
@@ -136,6 +157,7 @@ abstract class Mapper implements Autowired
 
 		foreach ($commandProperties as $commandProperty => $type) {
 			$plural = $this->matchPlural($commandProperty, $entityProperties);
+
 			if ($plural !== null) {
 				$match[$plural] = [
 					"type" => $entityProperties[$plural],
@@ -144,9 +166,15 @@ abstract class Mapper implements Autowired
 			}
 
 			if (array_key_exists($commandProperty, $entityProperties)) {
+				$value = $command->$commandProperty;
+				bdump($command->$commandProperty);
+				if (class_exists($command->$commandProperty) && str_ends_with($command->$commandProperty::class, 'DTO')) {
+					$value = $value->toEntity();
+				}
+
 				$match[$commandProperty] = [
 					"type" => $entityProperties[$commandProperty],
-					"value" => $command->$commandProperty,
+					"value" => $value,
 				];
 			}
 		}

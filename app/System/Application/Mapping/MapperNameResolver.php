@@ -47,16 +47,26 @@ final class MapperNameResolver
 	 */
 	private function getClassName(object $command): string
 	{
-		$className = basename(str_replace('\\', '/', $command::class));
-
-		return $className;
+		return basename(str_replace('\\', '/', $command::class));
 	}
 
 	private function getEntityName(object $command): string
 	{
 		$className = $this->getClassName($command);
-		$method = $this->getMethodTypeFromClassName($className);
 
-		return $this->inflector->singularize(substr($className, strlen($method)));
+		foreach (['By', 'DTO'] as $keyword) {
+			$className = preg_replace(
+				sprintf('/%s.*/', $keyword),
+				'',
+				$className,
+			);
+		}
+
+		return $this->inflector->singularize(
+			substr(
+				$className,
+				strlen($this->getMethodTypeFromClassName($className)),
+			),
+		);
 	}
 }

@@ -4,6 +4,9 @@ services:
 	-
 		class: \app\Score\Domain\Repository\ScoreRepository
 		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\Score\Domain\Entity\Score)
+	-
+		class: \app\Day\Domain\Repository\DayRepository
+		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\Day\Domain\Entity\Day)
 
 extensions:
 	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension

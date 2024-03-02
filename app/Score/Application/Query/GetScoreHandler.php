@@ -15,7 +15,6 @@ final class GetScoreHandler extends QueryHandler
 
 	public function __invoke(GetScore $query): ?Score
 	{
-		//TODO:
-		return $this->map($query)[0];
+		return $this->map($query);
 	}
 }

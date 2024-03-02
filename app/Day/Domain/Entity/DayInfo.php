@@ -24,45 +24,41 @@ use Doctrine\ORM\Mapping as ORM;
 class DayInfo extends Entity
 {
 	/**
+	 * @ORM\Column(type="string")
+	 */
+	public string $dayInWeek;
+	/**
+	 * @ORM\Column(type="string")
+	 */
+	public string $dayNumber;
+	/**
+	 * @ORM\Column(type="string", nullable=true)
+	 */
+	public ?string $holidayName;
+	/**
 	 * @ORM\Id
 	 * @ORM\GeneratedValue
 	 * @ORM\Column(type="integer")
 	 */
-	protected ?int $id;
-	/**
-	 * @ORM\Column(type="string")
-	 */
-	private string $dayInWeek;
-	/**
-	 * @ORM\OneToOne(targetEntity="Day")
-	 */
-	private DayInfo $dayInfo;
-	/**
-	 * @ORM\Column(type="string")
-	 */
-	private string $dayNumber;
-	/**
-	 * @ORM\Column(type="string", nullable=true)
-	 */
-	private ?string $holidayName;
+	public ?int $id;
 	/**
 	 * @ORM\Column(type="boolean")
 	 */
-	private bool $isHoliday;
+	public bool $isHoliday;
 	/**
 	 * @ORM\Column(type="json")
 	 */
-	private array $month;
+	public array $month;
 	/**
 	 * @ORM\Column(type="string")
 	 */
-	private string $monthNumber;
+	public string $monthNumber;
 	/**
 	 * @ORM\Column(type="string")
 	 */
-	private string $name;
+	public string $name;
 	/**
 	 * @ORM\Column(type="string")
 	 */
-	private string $year;
+	public string $year;
 }
