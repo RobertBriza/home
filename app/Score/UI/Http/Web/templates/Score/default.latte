@@ -1,5 +1,5 @@
 {layout ../../../../../../System/UI/Http/Web/templates/@layout.latte}
-{varType app\Day\Domain\DayInfoDTO $dayInfoDTO}
+{varType app\Day\Domain\DTO\DayDTO $dayDTO}
 
 {templateType app\System\UI\Http\Web\Template\BaseTemplate}
 {block title}Hodnocení dne{/block}
@@ -15,11 +15,11 @@
 			<a class="flex-1 flex justify-center">Den</a>
 		</div>
 		<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg">
-			{$dayInfoDTO->dayNumber}. {$dayInfoDTO->month['genitive']} {$dayInfoDTO->year}
+			{$dayDTO->dayInfo->dayNumber}. {$dayDTO->dayInfo->month['genitive']} {$dayDTO->dayInfo->year}
 		</div>
 	</div>
 	<div class="grid grid-cols-7 gap-3 flex-1 mt-3">
-		{foreach $dayInfoDTO->last7Days() as $day}
+		{foreach $dayDTO->last7Days() as $day}
 			<div class="bg-slate-700 p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-300">
 				<div>{$day->format('m.d.')}</div>
 			</div>
