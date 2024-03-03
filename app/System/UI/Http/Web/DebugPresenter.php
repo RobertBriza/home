@@ -41,13 +41,6 @@ class DebugPresenter extends BasePresenter
 		dumpe('saved');
 	}
 
-	public function actionFindEntities(): void
-	{
-		$entities = $this->mapper->map(new FindMembersBy());
-
-		dumpe($entities);
-	}
-
 	public function actionGetDto(): void
 	{
 		$dayDTO = $this->mapper->map(new GetDayDTOByValue(new DateTimeImmutable("yesterday")));
@@ -58,6 +51,6 @@ class DebugPresenter extends BasePresenter
 	{
 		$dayDTO = $this->mapper->map(new GetDayDTOByValue(new DateTimeImmutable("now")));
 
-		dumpe($dayDTO->getDayInfo()->getMonth(), $dayDTO);
+		dumpe("tuto");
 	}
 }

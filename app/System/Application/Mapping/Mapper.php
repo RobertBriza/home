@@ -6,7 +6,6 @@ namespace app\System\Application\Mapping;
 use app\System\Application\Mapping\Map\TypeMap;
 use app\System\Application\Wiring\Autowired;
 use app\System\Domain\Entity\Entity;
-use app\System\Domain\Repository\T;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -19,6 +18,7 @@ final class Mapper implements Autowired
 	public function __construct(
 		private readonly MappingDataFactory $factory,
 		private readonly EntityManagerInterface $em,
+		private readonly DTOMapper $dtoMapper,
 		private readonly array $typeMaps,
 	) {
 	}
@@ -27,6 +27,21 @@ final class Mapper implements Autowired
 	{
 		$this->data = $this->factory->create($object);
 		$this->repository = $this->em->getRepository($this->data->entityName);
+
+		$result = $this->mapEntity();
+
+		if ($result !== null && $this->data->toDTO) {
+			dumpe($this->dtoMapper->map($result));
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @return Entity|mixed|null
+	 */
+	public function mapEntity(): mixed
+	{
 		$result = null;
 
 		if (
@@ -34,10 +49,6 @@ final class Mapper implements Autowired
 			|| $this->data->method === MappingMethod::Delete
 		) {
 			$result = $this->getEntity();
-
-			if ($this->data->toDTO) {
-				//TODO: $result = $this->mapEntityToDTO($result);
-			}
 		}
 
 		if ($this->data->method === MappingMethod::Find) {
@@ -73,9 +84,7 @@ final class Mapper implements Autowired
 
 	private function findEntities(): array
 	{
-		$entity = $this->repository->findBy($this->data->properties);
-
-		return $entity;
+		return $this->repository->findBy($this->data->properties);
 	}
 
 	/**

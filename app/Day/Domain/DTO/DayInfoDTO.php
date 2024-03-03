@@ -9,7 +9,7 @@ use app\Day\Domain\Entity\DayInfo;
 final readonly class DayInfoDTO
 {
 	/** @param array{nominative: string, genitive: string} $month */
-	private function __construct(
+	public function __construct(
 		public string $dayNumber,
 		public string $dayInWeek,
 		public string $monthNumber,

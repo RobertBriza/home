@@ -9,7 +9,7 @@ use DateTimeImmutable;
 
 final readonly class DayDTO
 {
-	private function __construct(
+	public function __construct(
 		public DateTimeImmutable $value,
 		public DayInfoDTO $dayInfo,
 	) {
