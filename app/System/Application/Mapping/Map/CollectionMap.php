@@ -21,20 +21,20 @@ final readonly class CollectionMap implements TypeMap
 	) {
 	}
 
-	public function isValid(array $data): bool
+	public function isValid(mixed $value): bool
 	{
-		return $this->isCollection($data['type']);
+		return $this->isCollection($value);
 	}
 
-	public function map(Entity $entity, string $property, array $data): void
+	public function map(Entity $entity, string $property, mixed $value): void
 	{
 		$propertyName = ucfirst(substr($property, 0, -1));
 
 		$className = $this->getFullClassName($propertyName);
 
 		foreach ($this->collectionMaps as $collectionMap) {
-			if ($collectionMap->isValid($data['value'], $className)) {
-				$propertyValue = $collectionMap->map($data['value'], $className);
+			if ($collectionMap->isValid($value, $className)) {
+				$propertyValue = $collectionMap->map($value, $className);
 				$this->setCollection($entity, $propertyName, $propertyValue);
 
 				return;
@@ -102,8 +102,8 @@ final readonly class CollectionMap implements TypeMap
 		throw new ApplicationException('Could not find entity with name ' . $entityName);
 	}
 
-	private function isCollection(string $type): bool
+	private function isCollection(mixed $value): bool
 	{
-		return $type === Collection::class;
+		return $value instanceof Collection;
 	}
 }

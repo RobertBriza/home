@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\System\Domain\Entity;
 
-use app\Rally\Domain\Exception\PropertyNotSet;
+use app\System\Domain\Exception\PropertyNotSet;
 use LogicException;
 
 abstract class Entity

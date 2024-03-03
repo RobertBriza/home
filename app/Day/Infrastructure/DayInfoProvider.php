@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\Day\Infrastructure;
 
 use app\Day\Application\Command\CreateDay;
+use app\Day\Application\Query\GetDayDTOByValue;
 use app\Day\Domain\DTO\DayDTO;
 use app\System\Application\CQRS\CQRS;
 use app\System\Application\CQRS\CQRSAble;
@@ -24,6 +27,12 @@ final class DayInfoProvider implements CQRSAble, Autowired
 
 	public function save(DateTimeImmutable $dateTime): void
 	{
+		$day = $this->sendQuery(new GetDayDTOByValue($dateTime));
+
+		if ($day !== null) {
+			return;
+		}
+
 		$dto = DayDTO::fromArray($this->getApi($dateTime));
 
 		$this->cache->save(

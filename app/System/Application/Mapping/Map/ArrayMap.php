@@ -1,19 +1,17 @@
 <?php
 
-declare(strict_types=1);
-
 namespace app\System\Application\Mapping\Map;
 
 use app\System\Domain\Entity\Entity;
 
-final class IntMap implements TypeMap
+final class ArrayMap implements TypeMap
 {
-	public function isValid(mixed $value): bool
+	#[\Override] public function isValid(mixed $value): bool
 	{
-		return is_int($value);
+		return is_array($value);
 	}
 
-	public function map(Entity $entity, string $property, mixed $value): void
+	#[\Override] public function map(Entity $entity, string $property, mixed $value): void
 	{
 		$method = 'set' . ucfirst($property);
 

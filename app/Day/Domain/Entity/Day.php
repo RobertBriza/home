@@ -17,24 +17,46 @@ use Doctrine\ORM\Mapping as ORM;
 class Day extends Entity
 {
 	/**
-	 * @ORM\OneToOne(
-	 *   targetEntity="DayInfo",
-	 *   cascade={"persist", "remove"}
-	 * )
-	 */
-	public DayInfo $dayInfo;
-	/**
-	 * @ORM\Column(type="date_immutable")
-	 */
-	public DateTimeImmutable $value;
-	/**
 	 * @ORM\Id
 	 * @ORM\GeneratedValue
 	 * @ORM\Column(type="integer")
 	 */
-	protected ?int $id;
+	public ?int $id;
+	/**
+	 * @ORM\OneToOne(
+	 *   targetEntity="DayInfo",
+	 *   inversedBy="day",
+	 *   cascade={"persist", "remove"}
+	 * )
+	 * @ORM\JoinColumn(name="day_info_id", referencedColumnName="id")
+	 */
+	protected DayInfo $dayInfo;
+	/**
+	 * @ORM\Column(type="date_immutable")
+	 */
+	protected DateTimeImmutable $value;
 
 	public function __construct()
 	{
+	}
+
+	public function getDayInfo(): DayInfo
+	{
+		return $this->dayInfo;
+	}
+
+	public function setDayInfo(DayInfo $dayInfo): void
+	{
+		$this->dayInfo = $dayInfo;
+	}
+
+	public function getValue(): DateTimeImmutable
+	{
+		return $this->value;
+	}
+
+	public function setValue(DateTimeImmutable $value): void
+	{
+		$this->value = $value;
 	}
 }

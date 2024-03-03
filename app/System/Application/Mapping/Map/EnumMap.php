@@ -7,14 +7,14 @@ namespace app\System\Application\Mapping\Map;
 use app\System\Domain\Entity\Entity;
 use ReflectionObject;
 
-class EnumMap implements TypeMap
+final class EnumMap implements TypeMap
 {
-	public function isValid(array $data): bool
+	public function isValid(mixed $value): bool
 	{
-		return is_object($data['value']) && $this->isEnum($data['value']);
+		return is_object($value) && $this->isEnum($value);
 	}
 
-	public function map(Entity $entity, string $property, array $data): void
+	public function map(Entity $entity, string $property, mixed $value): void
 	{
 		$method = 'set' . ucfirst($property);
 

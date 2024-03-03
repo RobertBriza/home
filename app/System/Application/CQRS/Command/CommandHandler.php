@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace app\System\Application\CQRS\Command;
 
-use app\System\Application\Mapping\CommandEntityMapper;
+use app\System\Application\Mapping\Mapper;
 use app\System\Application\Wiring\Autowired;
 use Doctrine\ORM\EntityManagerInterface;
 
 abstract class CommandHandler implements Autowired
 {
 	protected EntityManagerInterface $em;
-	protected CommandEntityMapper $mapper;
+	protected Mapper $mapper;
 
 	public function map(object $command): mixed
 	{
@@ -29,7 +29,7 @@ abstract class CommandHandler implements Autowired
 		$this->em = $em;
 	}
 
-	public function setMapper(CommandEntityMapper $mapper): void
+	public function setMapper(Mapper $mapper): void
 	{
 		$this->mapper = $mapper;
 	}

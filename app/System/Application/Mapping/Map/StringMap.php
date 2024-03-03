@@ -6,19 +6,19 @@ namespace app\System\Application\Mapping\Map;
 
 use app\System\Domain\Entity\Entity;
 
-class StringMap implements TypeMap
+final class StringMap implements TypeMap
 {
-	public function isValid(array $data): bool
+	public function isValid(mixed $value): bool
 	{
-		return is_string($data['value']);
+		return is_string($value);
 	}
 
-	public function map(Entity $entity, string $property, array $data): void
+	public function map(Entity $entity, string $property, $value): void
 	{
 		$method = 'set' . ucfirst($property);
 
 		if (method_exists($entity, $method)) {
-			$entity->$method($data['value']);
+			$entity->$method($value);
 		}
 	}
 }

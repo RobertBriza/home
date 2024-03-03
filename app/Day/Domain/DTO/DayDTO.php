@@ -38,8 +38,8 @@ final readonly class DayDTO
 	public static function fromEntity(Day $day): self
 	{
 		return new self(
-			$day->value,
-			DayInfoDTO::fromEntity($day->dayInfo),
+			$day->getValue(),
+			DayInfoDTO::fromEntity($day->getDayInfo()),
 		);
 	}
 

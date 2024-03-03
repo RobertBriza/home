@@ -6,17 +6,17 @@ namespace app\System\Application\Mapping\Map;
 
 use app\System\Domain\Entity\Entity;
 
-class EntityMap implements TypeMap
+final class EntityMap implements TypeMap
 {
-	public function isValid(array $data): bool
+	public function isValid(mixed $value): bool
 	{
-		return $data['value'] instanceof Entity;
+		return $value instanceof Entity;
 	}
 
-	public function map(Entity $entity, string $property, array $data): void
+	public function map(Entity $entity, string $property, mixed $value): void
 	{
 		if (property_exists($entity, $property)) {
-			$entity->{$property} = $data['value'];
+			$entity->{$property} = $value;
 		}
 	}
 }

@@ -6,21 +6,19 @@ namespace app\System\Application\Mapping\Map;
 
 use app\System\Domain\Entity\Entity;
 
-class BoolMap implements TypeMap
+final class BoolMap implements TypeMap
 {
-	public function isValid(array $data): bool
+	public function isValid(mixed $value): bool
 	{
-		return is_bool($data['value']);
+		return is_bool($value);
 	}
 
-	public function map(Entity $entity, string $property, array $data): void
+	public function map(Entity $entity, string $property, mixed $value): void
 	{
-		foreach (['is', 'has', 'can'] as $prefix) {
-			$method = $prefix . ucfirst($property);
+		$method = 'set' . ucfirst($property);
 
-			if (method_exists($entity, $method)) {
-				$entity->$method($data['value']);
-			}
+		if (method_exists($entity, $method)) {
+			$entity->$method($value);
 		}
 	}
 }

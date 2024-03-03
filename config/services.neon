@@ -2,10 +2,8 @@ services:
 	- app\System\Application\Vite\Vite(http://localhost:5173, %wwwDir%/manifest.json, not(%debugMode%))
 	- app\System\Application\Routing\Factory\RouterFactory::createRouter
 	- app\System\Application\Helper\TemplateRenderer(@twigEnvironment)
-	- app\System\Application\Mapping\MapperNameResolver(typed(app\System\Application\Mapping\Mapper))
 	- app\System\Application\Mapping\Map\CollectionMap(typed(app\System\Application\Mapping\Map\Collection\CollectionTypeMap))
 	- app\Day\Infrastructure\DayInfoProvider(app\Day\Infrastructure\DayInfoClient::create())
-
 
 	inflector: app\System\Application\Inflector\InflectorFactory::create()
 	configLoader:
@@ -22,18 +20,14 @@ services:
 	- Nette\Caching\Cache(@localStorage, 'local-cache')
 
 decorator:
-	app\System\Application\Mapping\Mapper:
-		setup:
-			- setTypeMaps(typed(app\System\Application\Mapping\Map\TypeMap))
-
 	app\System\Application\CQRS\Command\CommandHandler:
 		setup:
-			- setMapper(@app\System\Application\Mapping\CommandEntityMapper)
+			- setMapper(@app\System\Application\Mapping\Mapper)
 			- setEntityManager(@Doctrine\ORM\EntityManagerInterface)
 
 	app\System\Application\CQRS\Query\QueryHandler:
 		setup:
-			- setMapper(@app\System\Application\Mapping\QueryEntityMapper)
+			- setMapper(@app\System\Application\Mapping\Mapper)
 			- setEntityManager(@Doctrine\ORM\EntityManagerInterface)
 
 	app\System\UI\Http\Web\BasePresenter:

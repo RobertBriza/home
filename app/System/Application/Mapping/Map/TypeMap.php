@@ -9,9 +9,7 @@ use app\System\Domain\Entity\Entity;
 
 interface TypeMap extends Autowired
 {
-	/** @param array{value: mixed, type: string} $data */
-	public function isValid(array $data): bool;
+	public function isValid(mixed $value): bool;
 
-	/** @param array{value: mixed, type: string} $data */
-	public function map(Entity $entity, string $property, array $data): void;
+	public function map(Entity $entity, string $property, mixed $value): void;
 }

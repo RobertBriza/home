@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\Day\Domain\DTO;
 
 use app\Day\Domain\Entity\DayInfo;
@@ -47,14 +49,14 @@ final readonly class DayInfoDTO
 	public static function fromEntity(DayInfo $dayInfo): self
 	{
 		return new DayInfoDTO(
-			$dayInfo->dayNumber,
-			$dayInfo->dayInWeek,
-			$dayInfo->monthNumber,
-			$dayInfo->month,
-			$dayInfo->year,
-			$dayInfo->name,
-			$dayInfo->isHoliday,
-			$dayInfo->holidayName,
+			$dayInfo->getDayNumber(),
+			$dayInfo->getDayInWeek(),
+			$dayInfo->getMonthNumber(),
+			$dayInfo->getMonth(),
+			$dayInfo->getYear(),
+			$dayInfo->getName(),
+			$dayInfo->isHoliday(),
+			$dayInfo->getHolidayName(),
 		);
 	}
 
@@ -70,20 +72,5 @@ final readonly class DayInfoDTO
 			'isHoliday' => $this->isHoliday,
 			'holidayName' => $this->holidayName,
 		];
-	}
-
-	public function toEntity(): DayInfo
-	{
-		$dayInfo = new DayInfo();
-		$dayInfo->dayNumber = $this->dayNumber;
-		$dayInfo->dayInWeek = $this->dayInWeek;
-		$dayInfo->monthNumber = $this->monthNumber;
-		$dayInfo->month = $this->month;
-		$dayInfo->year = $this->year;
-		$dayInfo->name = $this->name;
-		$dayInfo->isHoliday = $this->isHoliday;
-		$dayInfo->holidayName = $this->holidayName;
-
-		return $dayInfo;
 	}
 }

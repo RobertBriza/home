@@ -18,7 +18,7 @@ final class GetDayDTOByValueHandler extends QueryHandler
 
 	public function __invoke(GetDayDTOByValue $query): ?DayDTO
 	{
-		return $this->cache->load(
+		$cache = $this->cache->load(
 			'dayInfo' . $query->value->format('Y-m-d'),
 			function (&$dependencies) use ($query) {
 				$dependencies[Cache::Expire] = '30 days';
@@ -33,5 +33,7 @@ final class GetDayDTOByValueHandler extends QueryHandler
 				return DayDTO::fromEntity($day);
 			},
 		);
+
+		return $cache;
 	}
 }
