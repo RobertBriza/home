@@ -7,6 +7,7 @@ use app\Score\Application\Command\DeleteScore;
 use app\Score\Application\Query\GetScoreByDate;
 use app\Score\UI\Http\Web\ScorePresenter;
 use app\System\UI\Http\Web\Control\BaseControl;
+use Exception;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
 use Nette\Utils\ArrayHash;
@@ -16,11 +17,9 @@ class DailyScoreControl extends BaseControl
 {
 	public function formSucceeded(Form $form, ArrayHash $values): void
 	{
-		bdump($values);
 		try {
-			$this->sendCommand(new CreateScore($values->score1, $values->score2, new \DateTimeImmutable()));
-		} catch (\Exception $e) {
-			bdump($e);
+			$this->sendCommand(new CreateScore($values->score1, $values->score2, $this->presenter->date));
+		} catch (Exception) {
 			$this->flashMessage('Nepodařilo se uložit hodnocení', 'error');
 		}
 
@@ -38,7 +37,7 @@ class DailyScoreControl extends BaseControl
 	{
 		try {
 			$this->template->score = $this->sendQuery(new GetScoreByDate($this->presenter->date));
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			bdump($e);
 			$this->flashMessage('Nepodařilo se načíst hodnocení', 'error');
 		}

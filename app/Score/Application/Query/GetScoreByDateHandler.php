@@ -7,7 +7,7 @@ use app\System\Application\CQRS\Query\QueryHandler;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-final class GetScoreHandler extends QueryHandler
+final class GetScoreByDateHandler extends QueryHandler
 {
 	public function __construct()
 	{

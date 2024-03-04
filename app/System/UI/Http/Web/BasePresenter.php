@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace app\System\UI\Http\Web;
 
 use app\Day\Application\Query\GetDayDTOByValue;
-use app\Day\Domain\DTO\DayDTO;
 use app\Day\Infrastructure\DayInfoProvider;
 use app\System\Application\CQRS\CQRS;
 use app\System\Application\CQRS\CQRSAble;
 use app\System\Application\Helper\CustomTranslator;
 use app\System\Application\Vite\Vite;
-use app\System\Domain\Exception\DomainException;
-use app\System\Domain\Exception\EntityNotFound;
 use app\System\UI\Http\Web\Template\BaseTemplate;
 use Contributte;
 use DateTimeImmutable;
@@ -38,29 +35,6 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 
 	public function beforeRender(): void
 	{
-		$this->date = new DateTimeImmutable();
-
-		$dayDTO = $this->cache->load(
-			'dayInfo' . $this->date->format('Y-m-d'),
-			function (&$dependencies) {
-				$dependencies[Cache::Expire] = '30 days';
-
-				/** @var DayDTO $dayDTO */
-				$dayDTO = $this->sendQuery(new GetDayDTOByValue($this->date));
-
-				if ($dayDTO === null) {
-					throw new EntityNotFound('Day not found');
-				}
-			},
-		);
-
-		if ($dayDTO === null) {
-			throw new DomainException('Day not found');
-		}
-
-		$this->template->dayDTO = $dayDTO;
-		$this->template->vite = $this->vite;
-
 		$this->redrawControl('title');
 		$this->redrawControl('content');
 		$this->redrawControl('flashes');
@@ -90,5 +64,15 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 	{
 		parent::startup();
 		$this->getSession()->start();
+
+		$this->date = new DateTimeImmutable();
+
+		$this->template->todayDTO = $this->cache->load(
+			'dayInfo' . $this->date->format('Y-m-d'),
+			fn () => $this->sendQuery(new GetDayDTOByValue($this->date)),
+			[Cache::Expire => '30 days'],
+		);
+
+		$this->template->vite = $this->vite;
 	}
 }

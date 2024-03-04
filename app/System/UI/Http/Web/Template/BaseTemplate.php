@@ -10,6 +10,6 @@ use Nette\Bridges\ApplicationLatte\Template;
 #[AllowDynamicProperties]
 final class BaseTemplate extends Template
 {
-	public DayDTO $dayDTO;
+	public DayDTO $todayDTO;
 	public Vite $vite;
 }

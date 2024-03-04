@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace app\Day\Domain\DTO;
 
-use app\Day\Domain\Entity\DayInfo;
-
 final readonly class DayInfoDTO
 {
 	/** @param array{nominative: string, genitive: string} $month */
@@ -44,33 +42,5 @@ final readonly class DayInfoDTO
 			$data['isHoliday'],
 			$data['holidayName'],
 		);
-	}
-
-	public static function fromEntity(DayInfo $dayInfo): self
-	{
-		return new DayInfoDTO(
-			$dayInfo->getDayNumber(),
-			$dayInfo->getDayInWeek(),
-			$dayInfo->getMonthNumber(),
-			$dayInfo->getMonth(),
-			$dayInfo->getYear(),
-			$dayInfo->getName(),
-			$dayInfo->isHoliday(),
-			$dayInfo->getHolidayName(),
-		);
-	}
-
-	public function toArray(): array
-	{
-		return [
-			'dayNumber' => $this->dayNumber,
-			'dayInWeek' => $this->dayInWeek,
-			'monthNumber' => $this->monthNumber,
-			'month' => $this->month,
-			'year' => $this->year,
-			'name' => $this->name,
-			'isHoliday' => $this->isHoliday,
-			'holidayName' => $this->holidayName,
-		];
 	}
 }

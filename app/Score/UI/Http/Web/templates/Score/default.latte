@@ -19,10 +19,16 @@
 		</div>
 	</div>
 	<div class="grid grid-cols-7 gap-3 flex-1 mt-3">
-		{foreach $dayDTO->last7Days() as $day}
+		{foreach app\Day\Application\Helper\DayHelper::getWeekRange($dayDTO->value) as $day}
+		{if $day <= $todayDTO->value}
 			<div class="bg-slate-700 p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-300">
-				<div>{$day->format('m.d.')}</div>
+					<a n:href=":Score:Score:default $day->format('Y-m-d H:i:s')">{$day->format('m.d.')}</a>
 			</div>
+		{else}
+			<div class="p-3 rounded-lg flex flex-col items-center cursor-not-allowed">
+				<a>{$day->format('m.d.')}</a>
+			</div>
+		{/if}
 		{/foreach}
 	</div>
 	{control dailyScore}

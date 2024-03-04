@@ -21,7 +21,7 @@ class Score extends Entity
 	 */
 	protected ?int $id;
 	/**
-	 * @ORM\Column(type="datetime_immutable")
+	 * @ORM\Column(type="date_immutable")
 	 */
 	private DateTimeImmutable $createdAt;
 	/**

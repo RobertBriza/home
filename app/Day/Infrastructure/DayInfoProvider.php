@@ -27,9 +27,9 @@ final class DayInfoProvider implements CQRSAble, Autowired
 
 	public function save(DateTimeImmutable $dateTime): void
 	{
-		$day = $this->sendQuery(new GetDayDTOByValue($dateTime));
+		$dto = $this->sendQuery(new GetDayDTOByValue($dateTime));
 
-		if ($day !== null) {
+		if ($dto !== null) {
 			return;
 		}
 
