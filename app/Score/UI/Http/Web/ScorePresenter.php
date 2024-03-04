@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\Score\UI\Http\Web;
 
-use app\Score\Application\Query\GetScore;
+use app\Score\Application\Query\GetScoreByDate;
 use app\Score\Domain\Entity\Score;
 use app\Score\UI\Http\Web\Control\DailyScoreControlFactory;
 use app\System\UI\Http\Web\BasePresenter;
@@ -20,7 +20,7 @@ class ScorePresenter extends BasePresenter
 
 	public function render(): void
 	{
-		$this->score = $this->sendQuery(new GetScore());
+		$this->score = $this->sendQuery(new GetScoreByDate($this->date));
 		$this->template->score = $this->score;
 	}
 

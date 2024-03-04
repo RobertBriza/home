@@ -4,7 +4,7 @@ namespace app\Score\UI\Http\Web\Control;
 
 use app\Score\Application\Command\CreateScore;
 use app\Score\Application\Command\DeleteScore;
-use app\Score\Application\Query\GetScore;
+use app\Score\Application\Query\GetScoreByDate;
 use app\Score\UI\Http\Web\ScorePresenter;
 use app\System\UI\Http\Web\Control\BaseControl;
 use Nette\Application\UI\Form;
@@ -37,7 +37,7 @@ class DailyScoreControl extends BaseControl
 	public function render(mixed ...$args): void
 	{
 		try {
-			$this->template->score = $this->sendQuery(new GetScore());
+			$this->template->score = $this->sendQuery(new GetScoreByDate($this->presenter->date));
 		} catch (\Exception $e) {
 			bdump($e);
 			$this->flashMessage('Nepodařilo se načíst hodnocení', 'error');

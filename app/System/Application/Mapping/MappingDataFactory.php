@@ -125,7 +125,7 @@ final class MappingDataFactory implements Autowired
 	private function setParameters(object $object): void
 	{
 		$params = get_object_vars($object);
-
+		
 		if ($params === []) {
 			// empty array
 			$this->data->isParametrized = true;
@@ -159,9 +159,12 @@ final class MappingDataFactory implements Autowired
 
 				if ($isDTO) {
 					$this->data->isDTO = true;
+					$this->setObjectProperties(get_object_vars($param));
+
+					return;
 				}
 
-				$this->setObjectProperties(get_object_vars($param));
+				$this->setObjectProperties($params);
 
 				return;
 			}

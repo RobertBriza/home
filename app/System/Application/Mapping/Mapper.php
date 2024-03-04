@@ -31,7 +31,7 @@ final class Mapper implements Autowired
 		$result = $this->mapEntity();
 
 		if ($result !== null && $this->data->toDTO) {
-			dumpe($this->dtoMapper->map($result));
+			$result = $this->dtoMapper->map($result);
 		}
 
 		return $result;

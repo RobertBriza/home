@@ -13,7 +13,7 @@ final class GetScoreHandler extends QueryHandler
 	{
 	}
 
-	public function __invoke(GetScore $query): ?Score
+	public function __invoke(GetScoreByDate $query): ?Score
 	{
 		return $this->map($query);
 	}
