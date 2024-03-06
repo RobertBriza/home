@@ -1,5 +1,6 @@
 {layout ../../../../../../System/UI/Http/Web/templates/@layout.latte}
 {varType app\Day\Domain\DTO\DayDTO $dayDTO}
+{var $range = app\Day\Application\Helper\DayHelper::getWeekRange($dayDTO->value)}
 
 {templateType app\System\UI\Http\Web\Template\BaseTemplate}
 {block title}Hodnocení dne{/block}
@@ -8,7 +9,7 @@
 <div class="px-2 h-36 flex flex-col">
 	<div class="grid grid-cols-4 gap-3 flex-1 mt-3">
 		<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
-		{control selectRange dayDTO:$dayDTO}
+		{control selectRange dayDTO:$dayDTO, range:$range}
 		<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg">
 			{$dayDTO->dayInfo->dayNumber}. {$dayDTO->dayInfo->month['genitive']} {$dayDTO->dayInfo->year}
 		</div>

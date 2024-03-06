@@ -25,9 +25,9 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 
 	/** @inject */
 	public Cache $cache;
-	public DateTimeImmutable $today;
 	/** @inject */
 	public CustomTranslator $t;
+	public DateTimeImmutable $today;
 	/** @inject */
 	public Contributte\Translation\LocalesResolvers\Session $translatorSessionResolver;
 	protected DayInfoProvider $dayInfoProvider;
