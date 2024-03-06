@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace app\System\UI\Http\Web;
 
 use app\Day\Application\Command\CreateDay;
+use app\Day\Application\Helper\DayHelper;
 use app\Day\Application\Query\GetDayDTOByValue;
 use app\Day\Domain\DTO\DayDTO;
 use app\System\Application\Mapping\Mapper;
@@ -49,7 +50,7 @@ class DebugPresenter extends BasePresenter
 
 	public function actionTest(): void
 	{
-		$dayDTO = $this->mapper->map(new GetDayDTOByValue(new DateTimeImmutable("now")));
+		dumpe(DayHelper::getWeekRange(new DateTimeImmutable("tomorrow")));
 
 		dumpe("tuto");
 	}

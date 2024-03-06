@@ -18,6 +18,7 @@ class DailyScoreControl extends BaseControl
 	public function formSucceeded(Form $form, ArrayHash $values): void
 	{
 		try {
+			bdump($this->presenter->date);
 			$this->sendCommand(new CreateScore($values->score1, $values->score2, $this->presenter->date));
 		} catch (Exception) {
 			$this->flashMessage('Nepodařilo se uložit hodnocení', 'error');

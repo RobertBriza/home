@@ -25,7 +25,7 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 
 	/** @inject */
 	public Cache $cache;
-	public DateTimeImmutable $date;
+	public DateTimeImmutable $today;
 	/** @inject */
 	public CustomTranslator $t;
 	/** @inject */
@@ -65,11 +65,11 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 		parent::startup();
 		$this->getSession()->start();
 
-		$this->date = new DateTimeImmutable();
+		$this->today = new DateTimeImmutable();
 
 		$this->template->todayDTO = $this->cache->load(
-			'dayInfo' . $this->date->format('Y-m-d'),
-			fn () => $this->sendQuery(new GetDayDTOByValue($this->date)),
+			'dayInfo' . $this->today->format('Y-m-d'),
+			fn () => $this->sendQuery(new GetDayDTOByValue($this->today)),
 			[Cache::Expire => '30 days'],
 		);
 

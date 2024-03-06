@@ -18,18 +18,16 @@
 			{$dayDTO->dayInfo->dayNumber}. {$dayDTO->dayInfo->month['genitive']} {$dayDTO->dayInfo->year}
 		</div>
 	</div>
-	<div class="grid grid-cols-7 gap-3 flex-1 mt-3">
+	<div class="grid grid-cols-9 gap-3 flex-1 mt-3">
+		<a n:href=":Score:Score:default $dayDTO->value->sub($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500"><</a>
 		{foreach app\Day\Application\Helper\DayHelper::getWeekRange($dayDTO->value) as $day}
-		{if $day <= $todayDTO->value}
-			<div class="bg-slate-700 p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-300">
-					<a n:href=":Score:Score:default $day->format('Y-m-d H:i:s')">{$day->format('m.d.')}</a>
-			</div>
-		{else}
-			<div class="p-3 rounded-lg flex flex-col items-center cursor-not-allowed">
-				<a>{$day->format('m.d.')}</a>
-			</div>
-		{/if}
+			{if $day <= $todayDTO->value}
+				<a n:href=":Score:Score:default $day->format('Y-m-d H:i:s')" class="bg-slate-700 p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">{$day->format('m.d.')}</a>
+			{else}
+				<p class="p-3 rounded-lg flex flex-col items-center">{$day->format('m.d.')}</p>
+			{/if}
 		{/foreach}
+		<a n:href=":Score:Score:default $dayDTO->value->add($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">></a>
 	</div>
 	{control dailyScore}
 </div>
