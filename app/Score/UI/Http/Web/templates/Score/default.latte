@@ -8,7 +8,7 @@
 <div class="px-2 h-36 flex flex-col">
 	<div class="grid grid-cols-4 gap-3 flex-1 mt-3">
 		<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
-		<div class="flex col-span-2 bg-slate-700 p-3 overflow-auto justify-between rounded-lg">
+		<div class="flex col-span-2 bg-slate-700 p-3 overflow-auto justify-between rounded-lg select-none">
 			<a class="flex-1 flex justify-center">Rok</a>
 			<a class="flex-1 flex justify-center">Měsíc</a>
 			<a class="flex-1 flex justify-center">Týden</a>
@@ -18,13 +18,13 @@
 			{$dayDTO->dayInfo->dayNumber}. {$dayDTO->dayInfo->month['genitive']} {$dayDTO->dayInfo->year}
 		</div>
 	</div>
-	<div class="grid grid-cols-9 gap-3 flex-1 mt-3">
+	<div class="grid grid-cols-9 gap-3 flex-1 mt-3 select-none">
 		<a n:href=":Score:Score:default $dayDTO->value->sub($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500"><</a>
 		{foreach app\Day\Application\Helper\DayHelper::getWeekRange($dayDTO->value) as $day}
 			{if $day <= $todayDTO->value}
 				<a n:href=":Score:Score:default $day->format('Y-m-d H:i:s')" class="bg-slate-700 p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">{$day->format('m.d.')}</a>
 			{else}
-				<p class="p-3 rounded-lg flex flex-col items-center">{$day->format('m.d.')}</p>
+				<p class="p-3 rounded-lg flex flex-col items-center select-none">{$day->format('m.d.')}</p>
 			{/if}
 		{/foreach}
 		<a n:href=":Score:Score:default $dayDTO->value->add($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">></a>
