@@ -25,5 +25,9 @@
 		{/foreach}
 		<a n:href=":Score:Score:default $dayDTO->value->add($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">></a>
 	</div>
-	{control dailyScore}
+	<div class="grid grid-cols-4 gap-3 flex-1 mt-3">
+	{foreach $range as $date}
+		{control dailyScore date:$date}
+	{/foreach}
+	</div>
 </div>
