@@ -11,7 +11,6 @@ use app\Score\Application\Query\GetScoreByDate;
 use app\Score\Domain\Entity\Score;
 use app\Score\UI\Http\Web\Control\DailyScoreControlFactory;
 use app\Score\UI\Http\Web\Control\DailyScoreToggleControlFactory;
-use app\Score\UI\Http\Web\Control\SelectTimeRangeControlFactory;
 use app\System\UI\Http\Web\BasePresenter;
 use DateInterval;
 use DateTimeImmutable;
@@ -57,7 +56,6 @@ class ScorePresenter extends BasePresenter
 		}
 
 		$this->template->dateScores = $dateScores;
-		bdump($this->template->dateScores);
 		$this->template->week = new DateInterval('P7D');
 
 	}
