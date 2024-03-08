@@ -1,0 +1,14 @@
+<div class="grid grid-cols-4">
+	{foreach $dateScores as $dateScore}
+		<a n:href=":Score:Score:default $dateScore['dayDTO']->value->format('Y-m-d')">
+			<div class="bg-slate-700 p-3 mx-1.5 pb-6 mt-3 rounded-lg">
+				<div class="grid grid-cols-1 gap-3">
+					<div class="flex justify-center">{$dateScore['dayDTO']->value->format('d.m.')}</div>
+					<div class="rounded-lg  w-full flex items-center justify-center text-5xl text-slate-800">
+						<p>{$dateScore['score']->getScore1()}/{$dateScore['score']->getScore2()}</p>
+					</div>
+				</div>
+			</div>
+		</a>
+	{/foreach}
+</div>

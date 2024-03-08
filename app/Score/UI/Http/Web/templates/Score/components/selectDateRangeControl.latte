@@ -1,0 +1,8 @@
+{varType app\Day\Domain\DTO\DayDTO $dayDTO}
+{varType app\Day\Domain\Enum\DateRange $dateRange}
+<div class="flex col-span-1 bg-slate-700 p-3 overflow-auto justify-between rounded-lg select-none">
+	<a class="flex-1 flex justify-center">Rok</a>
+	<a class="flex-1 flex justify-center">Měsíc</a>
+	<a n:if="$dateRange !== app\Day\Domain\Enum\DateRange::Week" href="{plink :Score:Score:listWeek $dayDTO->value->format('Y-m-d')}" class="flex-1 flex justify-center">Týden</a>
+	<a n:if="$dateRange !== app\Day\Domain\Enum\DateRange::Day" href="{plink :Score:Score:default $dayDTO->value->format('Y-m-d')}" class="flex-1 flex justify-center">Den</a>
+</div>

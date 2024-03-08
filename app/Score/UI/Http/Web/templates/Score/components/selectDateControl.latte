@@ -1,0 +1,15 @@
+{varType app\Day\Domain\DTO\DayDTO $dayDTO}
+{varType app\Day\Domain\DTO\DayDTO $todayDTO}
+<div class="grid grid-cols-9 gap-3 flex-1 mt-3 select-none">
+	<a n:href=":Score:Score:default $dayDTO->value->sub($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500"><</a>
+	{foreach app\Day\Application\Helper\DayHelper::getWeekRange($dayDTO->value) as $day}
+		{if $day->format('Y-m-d') === $dayDTO->value->format('Y-m-d')}
+			<a n:href=":Score:Score:default $day->format('Y-m-d H:i:s')" class="bg-slate-400 p-3 rounded-lg flex flex-col items-center hover:bg-slate-300 transition-all duration-500">{$day->format('d. m.')}</a>
+		{elseif $day <= $todayDTO->value}
+			<a n:href=":Score:Score:default $day->format('Y-m-d H:i:s')" class="bg-slate-700 p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">{$day->format('d. m.')}</a>
+		{else}
+			<p class="p-3 rounded-lg flex flex-col items-center select-none">{$day->format('d. m.')}</p>
+		{/if}
+	{/foreach}
+	<a n:href=":Score:Score:default $dayDTO->value->add($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">></a>
+</div>

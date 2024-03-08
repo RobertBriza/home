@@ -6,7 +6,6 @@ namespace app\Day\Domain\Repository;
 
 use app\Day\Application\Helper\DayHelper;
 use app\Day\Domain\DTO\DayDTO;
-use app\Day\Domain\DTO\DayInfoDTO;
 use app\Day\Domain\Entity\Day;
 use app\System\Domain\Repository\BaseRepository;
 use DateTimeImmutable;
@@ -30,18 +29,7 @@ final class DayRepository extends BaseRepository
 		$result = [];
 		/** @var Day $day */
 		foreach ($query->getResult() as $day) {
-			$dayInfoDTO = new DayInfoDTO(
-				$day->getDayInfo()->getDayNumber(),
-				$day->getDayInfo()->getDayInWeek(),
-				$day->getDayInfo()->getMonthNumber(),
-				$day->getDayInfo()->getMonth(),
-				$day->getDayInfo()->getYear(),
-				$day->getDayInfo()->getName(),
-				$day->getDayInfo()->isHoliday(),
-				$day->getDayInfo()->getHolidayName(),
-			);
-
-			$result[$day->getValue()->format('Y-m-d')] = new DayDTO($day->getValue(), $dayInfoDTO);
+			$result[$day->getValue()->format('Y-m-d')] = new DayDTO($day->getValue(), null);
 		}
 
 		return $result;

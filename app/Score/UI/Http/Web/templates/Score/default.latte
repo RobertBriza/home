@@ -1,30 +1,14 @@
 {layout ../../../../../../System/UI/Http/Web/templates/@layout.latte}
-{varType app\Day\Domain\DTO\DayDTO $dayDTO}
-
 {templateType app\System\UI\Http\Web\Template\BaseTemplate}
+
 {block title}Hodnocení dne{/block}
 
 {block content}
 <div class="px-2 h-36 flex flex-col">
-	<div class="grid grid-cols-4 gap-3 flex-1 mt-3">
-		<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg"></div>
-		{control selectRange dayDTO:$dayDTO}
-		<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg">
-			{$dayDTO->dayInfo->dayNumber}. {$dayDTO->dayInfo->month['genitive']} {$dayDTO->dayInfo->year}
-		</div>
+	<div class="grid grid-cols-2 gap-3 flex-1 mt-3">
+		{include ../../../../../../Score/UI/Http/Web/templates/Score/components/selectDateRangeControl.latte}
+		{include ../../../../../../Score/UI/Http/Web/templates/Score/components/dateControl.latte}
 	</div>
-	<div class="grid grid-cols-9 gap-3 flex-1 mt-3 select-none">
-		<a n:href=":Score:Score:default $dayDTO->value->sub($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500"><</a>
-		{foreach app\Day\Application\Helper\DayHelper::getWeekRange($dayDTO->value) as $day}
-			{if $day->format('Y-m-d') === $dayDTO->value->format('Y-m-d')}
-				<a n:href=":Score:Score:default $day->format('Y-m-d H:i:s')" class="bg-slate-400 p-3 rounded-lg flex flex-col items-center hover:bg-slate-300 transition-all duration-500">{$day->format('d. m.')}</a>
-			{elseif $day <= $todayDTO->value}
-				<a n:href=":Score:Score:default $day->format('Y-m-d H:i:s')" class="bg-slate-700 p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">{$day->format('d. m.')}</a>
-			{else}
-				<p class="p-3 rounded-lg flex flex-col items-center select-none">{$day->format('d. m.')}</p>
-			{/if}
-		{/foreach}
-		<a n:href=":Score:Score:default $dayDTO->value->add($week)->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500">></a>
-	</div>
-	{control dailyScoreToggle date:$dayDTO->value}
+	{include ../../../../../../Score/UI/Http/Web/templates/Score/components/selectDateControl.latte}
+	{control dailyScoreToggle}
 </div>

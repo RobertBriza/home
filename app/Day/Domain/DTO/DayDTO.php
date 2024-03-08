@@ -10,7 +10,7 @@ final readonly class DayDTO
 {
 	public function __construct(
 		public DateTimeImmutable $value,
-		public DayInfoDTO $dayInfo,
+		public ?DayInfoDTO $dayInfo,
 	) {
 	}
 
