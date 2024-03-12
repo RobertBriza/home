@@ -1,5 +1,4 @@
-{var $columnsClassName = "grid-cols-" . count($dateScores)}
-<div class="grid {$columnsClassName}">
+<div class="grid grid-flow-col">
 	{foreach $dateScores as $dateScore}
 		<a n:href=":Score:Score:default $dateScore['dayDTO']->value->format('Y-m-d')">
 			<div class="bg-slate-700 p-3 mx-1.5 pb-6 mt-3 rounded-lg hover:bg-slate-500 transition-all duration-500">

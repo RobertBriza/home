@@ -10,6 +10,39 @@ use DateTimeImmutable;
 final class DayHelper
 {
 	/** @return DateTimeImmutable[] */
+	public static function getMonthRange(?DateTimeImmutable $date = null): array
+	{
+		$firstDayOfMonth = $date->modify('first day of this month midnight');
+		$lastDayOfMonth = $date->modify('last day of this month midnight');
+
+		if ($firstDayOfMonth->format('w') !== '0') {
+			$firstDayOfMonth = $firstDayOfMonth->modify('last sunday');
+		}
+
+		if ($lastDayOfMonth->format('w') !== '6') {
+			$lastDayOfMonth = $lastDayOfMonth->modify('last saturday');
+		}
+
+		$dayOfWeek = $date->format('w');
+
+		$weeks = [];
+
+		for (
+			$currentDate = $firstDayOfMonth;
+			$currentDate <= $lastDayOfMonth;
+			$currentDate = $currentDate->modify('+1 week')
+		) {
+			$weeks[] = [
+				'start' => $currentDate,
+				'weekDay' => $currentDate->modify(sprintf("+%s days", $dayOfWeek)),
+				'end' => $currentDate->modify('+6 days'),
+			];
+		}
+
+		return $weeks;
+	}
+
+	/** @return DateTimeImmutable[] */
 	public static function getWeekRange(?DateTimeImmutable $date = null): array
 	{
 		if ($date === null) {
