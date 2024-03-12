@@ -6,7 +6,7 @@
 		<a n:href=":Score:Score:listWeek $dayDTO->value->sub((app\Day\Domain\Enum\DateRange::Week)->interval())->format('Y-m-d')" class="p-3 rounded-lg flex flex-col items-center hover:bg-slate-500 transition-all duration-500"><</a>
 	</div>
 	<div class="grid col-span-6 grid-flow-col gap-3">
-	{foreach app\Day\Application\Helper\DayHelper::getMonthRange($dayDTO->value) as $week}
+	{foreach app\Day\Application\Helper\DayHelper::getMonthRangePerWeek($dayDTO->value) as $week}
 		{if $week['weekDay']->format('Y-m-d') === $dayDTO->value->format('Y-m-d')}
 			<a n:href=":Score:Score:listWeek $week['weekDay']->format('Y-m-d H:i:s')" class="bg-slate-400 py-3 rounded-lg flex flex-col items-center hover:bg-slate-300 transition-all duration-500">
 				<div class="grid grid-rows-3">

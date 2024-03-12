@@ -18,6 +18,6 @@ final readonly class FindDaysForRangeHandler implements Autowired
 	public function __invoke(FindDaysForRange $query): array
 	{
 
-		return $this->dayRepository->findDaysForRange($query->date);
+		return $this->dayRepository->findDaysForRange($query->date, $query->range);
 	}
 }

@@ -1,0 +1,13 @@
+{layout ../../../../../../System/UI/Http/Web/templates/@layout.latte}
+{templateType app\System\UI\Http\Web\Template\BaseTemplate}
+{block title}Hodnocení dne{/block}
+
+{block content}
+<div class="px-2 h-36 flex flex-col">
+	<div class="grid grid-cols-2 gap-3 flex-1 mt-3">
+		{include ../../../../../../Score/UI/Http/Web/templates/Score/components/selectDateRangeControl.latte}
+		{include ../../../../../../Score/UI/Http/Web/templates/Score/components/dateControl.latte}
+	</div>
+	{include ../../../../../../Score/UI/Http/Web/templates/Score/components/selectMonthControl.latte}
+	{include ../../../../../../Score/UI/Http/Web/templates/Score/components/monthScoreControl.latte}
+</div>

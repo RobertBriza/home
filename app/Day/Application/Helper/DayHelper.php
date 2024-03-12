@@ -9,8 +9,22 @@ use DateTimeImmutable;
 
 final class DayHelper
 {
-	/** @return DateTimeImmutable[] */
+	/** @return string[] */
 	public static function getMonthRange(?DateTimeImmutable $date = null): array
+	{
+		$firstDayOfMonth = $date->modify('first day of this month midnight');
+		$lastDayOfMonth = $date->modify('last day of this month midnight');
+
+		$days = [];
+		for ($i = 0; $i < $lastDayOfMonth->format('d'); $i++) {
+			$days[] = $firstDayOfMonth->modify(sprintf("+%s days", $i))->format('Y-m-d');
+		}
+
+		return $days;
+	}
+
+	/** @return DateTimeImmutable[] */
+	public static function getMonthRangePerWeek(?DateTimeImmutable $date = null): array
 	{
 		$firstDayOfMonth = $date->modify('first day of this month midnight');
 		$lastDayOfMonth = $date->modify('last day of this month midnight');
@@ -59,5 +73,17 @@ final class DayHelper
 		}
 
 		return $weekDates;
+	}
+
+	public static function getYearRange(?DateTimeImmutable $date = null): array
+	{
+		$firstMonth = $date->modify('first day of january');
+		$months = [$firstMonth];
+
+		for ($i = 1; $i <= 11; $i++) {
+			$months[] = $firstMonth->add(new DateInterval('P' . $i . 'M'));
+		}
+
+		return $months;
 	}
 }

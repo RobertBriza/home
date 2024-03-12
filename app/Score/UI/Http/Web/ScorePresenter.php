@@ -34,8 +34,31 @@ class ScorePresenter extends BasePresenter
 		$this->score = $this->sendQuery(new GetScoreByDate($this->date));
 		$this->template->dateRange = DateRange::Day;
 		$this->template->dayDTO = $this->sendQuery(new GetDayDTOByValue($this->date));
-		$this->template->range = $this->sendQuery(new FindDaysForRange($this->date, 'week'));
+		$this->template->range = $this->sendQuery(new FindDaysForRange($this->date, DateRange::Week));
 		$this->template->week = new DateInterval('P7D');
+	}
+
+	public function actionListMonth(?string $id = null): void
+	{
+		$dateRange = DateRange::Month;
+		$this->date = $id !== null ? new DateTimeImmutable($id) : new DateTimeImmutable();
+		$this->template->dateRange = $dateRange;
+		$this->template->dayDTO = $this->sendQuery(new GetDayDTOByValue($this->date));
+		$range = $this->sendQuery(new FindDaysForRange($this->date, $dateRange));
+
+		$dateScores = [];
+		foreach ($range as $dayDTO) {
+			$score = $this->sendQuery(new GetScoreByDate($dayDTO->value));
+			if ($score === null) {
+				continue;
+			}
+
+			$dateScores[] = ["score" => $score, "dayDTO" => $dayDTO];
+		}
+
+		$this->template->dateScores = $dateScores;
+		$this->template->month = $dateRange->interval();
+
 	}
 
 	public function actionListWeek(?string $id = null): void
@@ -43,7 +66,7 @@ class ScorePresenter extends BasePresenter
 		$this->date = $id !== null ? new DateTimeImmutable($id) : new DateTimeImmutable();
 		$this->template->dateRange = DateRange::Week;
 		$this->template->dayDTO = $this->sendQuery(new GetDayDTOByValue($this->date));
-		$range = $this->sendQuery(new FindDaysForRange($this->date, 'week'));
+		$range = $this->sendQuery(new FindDaysForRange($this->date, DateRange::Week));
 
 		$dateScores = [];
 		foreach ($range as $dayDTO) {

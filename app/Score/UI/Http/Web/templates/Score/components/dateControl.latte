@@ -1,4 +1,4 @@
 {varType app\Day\Domain\DTO\DayDTO $dayDTO}
-<div class="col-span-1 bg-slate-700 p-3 overflow-auto flex items-center justify-center rounded-lg">
-	{$dayDTO->dayInfo->dayNumber}. {$dayDTO->dayInfo->month['genitive']} {$dayDTO->dayInfo->year}
+<div class="flex col-span-1 bg-slate-700 p-3 overflow-auto items-center justify-center rounded-lg">
+	<p>{$dayDTO->dayInfo->dayNumber}. {$dayDTO->dayInfo->month['genitive']} {$dayDTO->dayInfo->year}</p>
 </div>
