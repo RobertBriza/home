@@ -51,6 +51,8 @@ naja.snippetHandler.addEventListener('afterUpdate', (event) => {
   }
 })
 
+window.naja = naja;
+
 const LibStimulus = new Application(document.documentElement)
 
 LibStimulus.start()

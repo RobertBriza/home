@@ -7,6 +7,10 @@ services:
 	-
 		class: \app\Day\Domain\Repository\DayRepository
 		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\Day\Domain\Entity\Day)
+	-
+		class: \app\Task\Domain\Repository\TaskRepository
+		factory: @Doctrine\ORM\EntityManagerInterface::getRepository(\app\Task\Domain\Entity\Task)
+
 
 extensions:
 	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
@@ -27,6 +31,7 @@ orm.annotations:
 		app\Score\Domain\Entity: %appDir%/Score/Domain/Entity
 		app\Rally\Domain\Entity: %appDir%/Rally/Domain/Entity
 		app\Day\Domain\Entity: %appDir%/Day/Domain/Entity
+		app\Task\Domain\Entity: %appDir%/Task/Domain/Entity
 
 nettrine.orm:
     configuration:
@@ -40,6 +45,8 @@ nettrine.dbal:
 		platform: @Doctrine\DBAL\Platforms\MariaDb1052Platform
 		typesMapping:
 			enum: string
+		types:
+			uuid: Ramsey\Uuid\Doctrine\UuidType
 		host: %default.host%
 		driver: mysqli
 		dbname: %default.dbname%

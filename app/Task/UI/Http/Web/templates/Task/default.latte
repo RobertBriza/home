@@ -1,0 +1,87 @@
+{layout ../../../../../../System/UI/Http/Web/templates/@layout.latte}
+{block title}Úkoly{/block}
+
+{block content}
+<div class="droppable grid gap-3 mt-3">
+	{foreach $tasks as $task}
+		{varType app\Task\Domain\Entity\Task $task}
+		{var $priorityCss = $task->getPriority()->getCssClass()}
+		<div class="draggable {$priorityCss} border-2 pl-5 bg-slate-600 rounded-lg py-3 p-2 w-full hover:bg-slate-500 transition-all duration-500"  draggable="true">
+			<div class="grid grid-flow-col gap-3 justify-between">
+				<p class="col-span-10">{$task->getTitle()}</p>
+				<div class="flex items-center">
+					<p class="text-sm" n:if="$task->getDueDatetime() !== null">{$task->getDueDatetime()->format('d.m.Y H:i:s')}</p>
+				</div>
+				<div class="flex items-center pr-2">
+					<input type="checkbox" value="#" class="size-5">
+				</div>
+			</div>
+			<p class="text-sm text-gray-400 mt-1" n:if="$task->getDescription() !== null">{$task->getDescription()|truncate:230}</p>
+		</div>
+	{/foreach}
+</div>
+	<div class="flex justify-center">
+		<a href="" class="bg-slate-600 justify-center text-center rounded-lg py-3 px-5 mt-3 hover:bg-slate-500 transition-all duration-500">+</a>
+	</div>
+<script type="application/javascript">
+	const draggables = document.querySelectorAll('.draggable')
+	const containers = document.querySelectorAll('.droppable')
+
+	draggables.forEach(draggable => {
+		draggable.addEventListener('dragstart', () => {
+			draggable.classList.add('dragging')
+		})
+
+		draggable.addEventListener('dragend', () => {
+			draggable.classList.remove('dragging')
+			const container = draggable.parentElement
+			const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+			const values = draggableElements.map(element => transformString(element.textContent.trim()));
+
+			naja.makeRequest('POST', '/task/task/reorder', JSON.stringify(values), {
+				fetch: {
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+				history: false,
+			});
+
+		})
+	})
+
+	containers.forEach(container => {
+		container.addEventListener('dragover', e => {
+			e.preventDefault()
+			const afterElement = getDragAfterElement(container, e.clientY)
+			const draggable = document.querySelector('.dragging')
+			if (afterElement == null) {
+				container.appendChild(draggable)
+			} else {
+				container.insertBefore(draggable, afterElement)
+			}
+		})
+	})
+
+	function transformString(str) {
+		return str.split(/\r?\n/)
+			.map(line => line.trim())
+			.filter(line => line.length > 0);
+	}
+
+	function getDragAfterElement(container, y) {
+		const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+
+		return draggableElements.reduce((closest, child) => {
+			const box = child.getBoundingClientRect()
+			const offset = y - box.top - box.height / 2
+			if (offset < 0 && offset > closest.offset) {
+				return { offset: offset, element: child }
+			} else {
+				return closest
+			}
+		}, { offset: Number.NEGATIVE_INFINITY }).element
+	}
+</script>
+{/block}
+

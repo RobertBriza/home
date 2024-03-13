@@ -43,7 +43,9 @@
 		"phpmd/phpmd": "^2.13",
 		"contributte/messenger": "^0.1.0",
 		"doctrine/inflector": "^2.0",
-		"latte/latte": "^3.0"
+		"latte/latte": "^3.0",
+		"ramsey/uuid": "^4.7",
+		"ramsey/uuid-doctrine": "^2.0"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
