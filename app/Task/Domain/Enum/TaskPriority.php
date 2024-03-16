@@ -8,6 +8,16 @@ enum TaskPriority: string
 	case MEDIUM = 'medium';
 	case HIGH = 'high';
 
+	/** @return array<string, string> */
+	public static function valuesForSelect(): array
+	{
+		return [
+			self::LOW->value => 'Nízká',
+			self::MEDIUM->value => 'Střední',
+			self::HIGH->value => 'Vysoká',
+		];
+	}
+
 	public function getCssClass(): string
 	{
 		return match ($this) {

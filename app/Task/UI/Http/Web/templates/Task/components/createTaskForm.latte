@@ -1,0 +1,41 @@
+<form n:name=createTaskForm class="flex flex-col">
+	<div class="flex flex-wrap -mx-3 mb-6 mt-6">
+		<div class="w-full px-3 mb-6 md:mb-0">
+			<label n:name="title" class="block uppercase tracking-wide dark:text-white text-xs font-bold mb-2" for="grid-first-name">Název</label>
+			<input n:name="title" class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Zadejte název">
+			<p class="text-red-500 text-xs italic">Prosím vyplňte název.</p>
+		</div>
+	</div>
+	<div class="flex flex-wrap -mx-3 mb-6">
+		<div class="w-full px-3">
+			<label n:name="description" class="block uppercase mb-2 text-xs font-bold text-gray-900 dark:text-white">Popis</label>
+			<textarea n:name="description" rows="4" class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" placeholder="Zadejte popis..."></textarea>
+		</div>
+	</div>
+	<div class="flex flex-wrap -mx-3 mb-2">
+		<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+			<label class="block uppercase tracking-wide dark:text-white text-xs font-bold mb-2" for="grid-state">
+				Priorita
+			</label>
+			<div class="relative">
+				<select n:name=priority class="block appearance-none w-full bg-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white"></select>
+				<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+					<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+				</div>
+			</div>
+		</div>
+		<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+			<label n:name="order" class="block uppercase tracking-wide dark:text-white text-xs font-bold mb-2" for="grid-city">Pořadí</label>
+			<input n:name="order" class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-city" type="text" placeholder="Zadejte číslo (1-100)">
+		</div>
+	</div>
+	<div class="w-full md:w-1/2 flex flex-wrap -mx-3 mb-6 mt-6">
+		<div class="w-full px-3 mb-6 md:mb-0">
+			<label n:name="dueDatetime" class="block uppercase tracking-wide dark:text-white text-xs font-bold mb-2" for="grid-zip">Datum a čas splnění</label>
+			<input n:name="dueDatetime" type="text" class="appearance-none block w-full text-center bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="datetimePicker" placeholder="Vyberte datum a čas">
+		</div>
+	</div>
+	<div class="flex justify-center">
+			<input n:name=send class="text-white bg-blue-700 font-bold py-5 px-10 rounded hover:bg-slate-900 cursor-pointer">
+	</div>
+</form>

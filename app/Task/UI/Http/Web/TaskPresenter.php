@@ -3,20 +3,36 @@
 namespace app\Task\UI\Http\Web;
 
 use app\System\UI\Http\Web\BasePresenter;
+use app\Task\Application\Command\DeleteTask;
+use app\Task\Application\Command\ReorderTasks;
 use app\Task\Application\Query\FindTasks;
+use app\Task\UI\Http\Web\Form\CreateTaskFormFactory;
 use Nette\Application\Responses\JsonResponse;
+use Nette\ComponentModel\IComponent;
+use Ramsey\Uuid\Rfc4122\UuidV4;
 
-class TaskPresenter extends BasePresenter
+final class TaskPresenter extends BasePresenter
 {
+	public function __construct(private CreateTaskFormFactory $formFactory)
+	{
+	}
+
 	public function actionReorder(): void
 	{
-		if (json_validate($this->getHttpRequest()->getRawBody()) === false) {
-			$this->sendResponse(new JsonResponse(['response' => 'Invalid JSON']));
-		}
+		$ids = array_map(static fn (array $data) => UuidV4::fromString($data['id']), $this->getPost());
+		$this->sendCommand(new ReorderTasks($ids));
 
-		$data = json_decode($this->getHttpRequest()->getRawBody(), true);
-		bdump($data);
 		$this->sendResponse(new JsonResponse(['response' => 'OK']));
+	}
+
+	public function createComponentCreateTaskForm(): ?IComponent
+	{
+		return $this->formFactory->create();
+	}
+
+	public function handleSoftDelete(): void
+	{
+		$this->sendCommand(new DeleteTask(UuidV4::fromString((string) $this->getPost())));
 	}
 
 	public function renderDefault(): void

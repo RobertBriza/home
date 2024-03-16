@@ -34,9 +34,9 @@ orm.annotations:
 		app\Task\Domain\Entity: %appDir%/Task/Domain/Entity
 
 nettrine.orm:
-    configuration:
-        customStringFunctions:
-            FIELD: DoctrineExtensions\Query\Mysql\Field
+	configuration:
+		customStringFunctions:
+			FIELD: DoctrineExtensions\Query\Mysql\Field
 
 nettrine.dbal:
 	debug:

@@ -7,6 +7,8 @@ namespace app\Task\Domain\Entity;
 use app\Task\Domain\Enum\TaskPriority;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity(repositoryClass="app\Task\Domain\Repository\TaskRepository")
@@ -16,10 +18,11 @@ class Task
 {
 	/**
 	 * @ORM\Id
-	 * @ORM\GeneratedValue
-	 * @ORM\Column(type="uuid")
+	 * @ORM\Column(type="uuid", unique=true)
+	 * @ORM\GeneratedValue(strategy="CUSTOM")
+	 * @ORM\CustomIdGenerator(class=UuidGenerator::class)
 	 */
-	protected ?int $id;
+	protected UuidInterface $id;
 	/**
 	 * @ORM\Column(type="datetime_immutable", nullable=true)
 	 */
@@ -33,13 +36,13 @@ class Task
 	 */
 	private ?DateTimeImmutable $dueDatetime = null;
 	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private int $order;
-	/**
 	 * @ORM\Column(type="string", enumType=TaskPriority::class, length=16)
 	 */
 	private TaskPriority $priority;
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	private int $taskOrder;
 	/**
 	 * @ORM\Column(type="string")
 	 */
@@ -58,9 +61,19 @@ class Task
 		return $this->deletedAt;
 	}
 
+	public function setDeletedAt(?DateTimeImmutable $deletedAt): void
+	{
+		$this->deletedAt = $deletedAt;
+	}
+
 	public function getDescription(): ?string
 	{
 		return $this->description;
+	}
+
+	public function setDescription(?string $description): void
+	{
+		$this->description = $description;
 	}
 
 	public function getDueDatetime(): ?DateTimeImmutable
@@ -68,9 +81,14 @@ class Task
 		return $this->dueDatetime;
 	}
 
-	public function getOrder(): int
+	public function setDueDatetime(?DateTimeImmutable $dueDatetime): void
 	{
-		return $this->order;
+		$this->dueDatetime = $dueDatetime;
+	}
+
+	public function getId(): UuidInterface
+	{
+		return $this->id;
 	}
 
 	public function getPriority(): TaskPriority
@@ -78,9 +96,29 @@ class Task
 		return $this->priority;
 	}
 
+	public function setPriority(TaskPriority $priority): void
+	{
+		$this->priority = $priority;
+	}
+
+	public function getTaskOrder(): int
+	{
+		return $this->taskOrder;
+	}
+
+	public function setTaskOrder(int $taskOrder): void
+	{
+		$this->taskOrder = $taskOrder;
+	}
+
 	public function getTitle(): string
 	{
 		return $this->title;
+	}
+
+	public function setTitle(string $title): void
+	{
+		$this->title = $title;
 	}
 
 	public function getUpdatedAt(): DateTimeImmutable
@@ -88,8 +126,18 @@ class Task
 		return $this->updatedAt;
 	}
 
+	public function setUpdatedAt(DateTimeImmutable $createdAt): void
+	{
+		$this->updatedAt = $createdAt;
+	}
+
 	public function getUpdatedBy(): ?DateTimeImmutable
 	{
 		return $this->updatedBy;
+	}
+
+	public function setUpdatedBy(?DateTimeImmutable $updatedBy): void
+	{
+		$this->updatedBy = $updatedBy;
 	}
 }

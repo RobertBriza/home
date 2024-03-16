@@ -6,14 +6,20 @@
 	{foreach $tasks as $task}
 		{varType app\Task\Domain\Entity\Task $task}
 		{var $priorityCss = $task->getPriority()->getCssClass()}
-		<div class="draggable {$priorityCss} border-2 pl-5 bg-slate-600 rounded-lg py-3 p-2 w-full hover:bg-slate-500 transition-all duration-500"  draggable="true">
+		<div
+						class="draggable {$priorityCss} border-2 pl-5 bg-slate-600 rounded-lg py-3 p-2 w-full hover:bg-slate-500 transition-all duration-500"
+						draggable="true"
+						data-task-id="{$task->getId()}"
+						data-task-order="{$task->getTaskOrder()}"
+						data-task-priority="{$task->getPriority()->value}"
+		>
 			<div class="grid grid-flow-col gap-3 justify-between">
 				<p class="col-span-10">{$task->getTitle()}</p>
 				<div class="flex items-center">
 					<p class="text-sm" n:if="$task->getDueDatetime() !== null">{$task->getDueDatetime()->format('d.m.Y H:i:s')}</p>
 				</div>
 				<div class="flex items-center pr-2">
-					<input type="checkbox" value="#" class="size-5">
+					<input type="checkbox" value="#" onchange="softDelete({$task->getId()->toString()})" class="size-5">
 				</div>
 			</div>
 			<p class="text-sm text-gray-400 mt-1" n:if="$task->getDescription() !== null">{$task->getDescription()|truncate:230}</p>
@@ -21,7 +27,7 @@
 	{/foreach}
 </div>
 	<div class="flex justify-center">
-		<a href="" class="bg-slate-600 justify-center text-center rounded-lg py-3 px-5 mt-3 hover:bg-slate-500 transition-all duration-500">+</a>
+		<a n:href=":Task:Task:new" class="bg-slate-600 justify-center text-center rounded-lg py-3 px-5 mt-3 hover:bg-slate-500 transition-all duration-500">+</a>
 	</div>
 <script type="application/javascript">
 	const draggables = document.querySelectorAll('.draggable')
@@ -36,7 +42,9 @@
 			draggable.classList.remove('dragging')
 			const container = draggable.parentElement
 			const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
-			const values = draggableElements.map(element => transformString(element.textContent.trim()));
+			const values = draggableElements.map(element => ({
+				id: element.getAttribute('data-task-id'),
+			}))
 
 			naja.makeRequest('POST', '/task/task/reorder', JSON.stringify(values), {
 				fetch: {
@@ -62,6 +70,17 @@
 			}
 		})
 	})
+
+	function softDelete(id) {
+		naja.makeRequest('POST', '/task/task/default/?do=softDelete', JSON.stringify(id), {
+			fetch: {
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			},
+			history: false,
+		});
+	}
 
 	function transformString(str) {
 		return str.split(/\r?\n/)

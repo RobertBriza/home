@@ -13,6 +13,7 @@ use app\System\Application\Vite\Vite;
 use app\System\UI\Http\Web\Template\BaseTemplate;
 use Contributte;
 use DateTimeImmutable;
+use Nette\Application\Responses\JsonResponse;
 use Nette\Application\UI\Presenter;
 use Nette\Caching\Cache;
 
@@ -58,6 +59,15 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 	public function setVite(Vite $vite): void
 	{
 		$this->vite = $vite;
+	}
+
+	protected function getPost(): mixed
+	{
+		if (json_validate($this->getHttpRequest()->getRawBody()) === false) {
+			$this->sendResponse(new JsonResponse(['response' => 'Invalid JSON']));
+		}
+
+		return json_decode($this->getHttpRequest()->getRawBody(), true);
 	}
 
 	protected function startup(): void

@@ -18,7 +18,7 @@ final class HomepagePresenter extends BasePresenter
 		$form->addSubmit('send', 'Send');
 
 		$form->onSuccess[] = function (Form $form, Nette\Utils\ArrayHash $values): void {
-			$this->flashMessage('Form was submitted', 'success');
+			$this->flashMessage('Control was submitted', 'success');
 			$this->redrawControl('snippet');
 		};
 
