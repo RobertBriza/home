@@ -10,9 +10,10 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     netcat-openbsd \
     cron \
+    libpq-dev \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
-    && docker-php-ext-install mysqli pdo pdo_mysql
+    && docker-php-ext-install mysqli pgsql pdo pdo_mysql pdo_pgsql
 
 RUN pecl install xdebug
 

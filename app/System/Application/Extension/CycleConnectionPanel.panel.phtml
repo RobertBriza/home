@@ -1,0 +1,85 @@
+<?php
+
+namespace app\System\Application\Extension;
+
+?>
+<style class="tracy-debug">
+	#tracy-debug .cycle-dbal-panel-sql {
+		background: white !important;
+	}
+
+	#tracy-debug .cycle-dbal-panel-sql > span, #tracy-debug .cycle-dbal-panel-sql > span > a {
+		color: #777 !important;
+	}
+
+	#tracy-debug .cycle-dbal-panel-sql > span > a:hover {
+		color: #fff !important;
+	}
+
+	#tracy-debug .cycle-dbal-panel-sql > span {
+		margin-right: 1em !important;
+	}
+
+	#tracy-debug .cycle-dbal-panel-sql .whitespace-explain {
+		white-space: pre !important;
+	}
+
+	#tracy-debug .cycle-dbal-panel-time {
+		text-align: right !important;
+		white-space: nowrap !important;
+		max-width: 70px !important;
+	}
+</style>
+
+<script>
+	function cycleDbalPanelCopySql(e, containerId) {
+		e.preventDefault();
+		const str = document.getElementById(containerId).textContent;
+		const el = document.createElement('textarea');
+		el.value = str;
+		el.setAttribute('readonly', '');
+		el.style.position = 'absolute';
+		el.style.left = '-9999px';
+		document.body.appendChild(el);
+		const selected =
+			document.getSelection().rangeCount > 0
+				? document.getSelection().getRangeAt(0)
+				: false;
+		el.select();
+		document.execCommand('copy');
+		document.body.removeChild(el);
+		if (selected) {
+			document.getSelection().removeAllRanges();
+			document.getSelection().addRange(selected);
+		}
+		return false;
+	}
+</script>
+
+<h1>Queries: <?php echo $count ?></h1>
+<div class="tracy-inner cycle-dbal-panel">
+	<table>
+		<tr>
+			<th class="cycle-dbal-panel-time">ms</th>
+			<th>SQL query</th>
+		</tr>
+		<?php
+		foreach ($queries as $query):
+			[$sql, $elapsedTime, $rowsCount] = $query;
+			$uniqRowId = uniqid('cycle-dbal-sql-');
+			?>
+			<tr>
+				<td class="cycle-dbal-panel-time"><?php echo $elapsedTime ? sprintf('%0.2f', $elapsedTime * 1000) : '' ?></td>
+				<td class="cycle-dbal-panel-sql">
+					<div id="<?php echo $uniqRowId; ?>"><?php echo $sql ?></div>
+					<?php if ($rowsCount !== null): ?>
+						<span class="cycle-dbal-rowscount"><?php echo $rowsCount === 1 ? $rowsCount . ' row' : $rowsCount . ' rows' ?></span>
+					<?php endif; ?>
+					<span><a href=""
+							onclick="cycleDbalPanelCopySql(event, '<?php echo $uniqRowId; ?>')">copy</a></span>
+				</td>
+			</tr>
+		<?php endforeach ?>
+	</table>
+	<?php if (count($queries) < $count): ?><p>...and more</p><?php endif ?>
+</div>

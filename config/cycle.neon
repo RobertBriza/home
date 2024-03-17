@@ -1,0 +1,22 @@
+extensions:
+	cycle.orm: app\System\Application\Extension\CycleOrmExtension
+	psr11: Contributte\Psr11\DI\Psr11ContainerExtension
+
+services:
+	cycle.logger: app\System\Application\Extension\CycleConnectionPanel
+	cycle.orm.model: app\System\Infrastructure\CycleOrmFactory::create(@\app\System\Infrastructure\CycleDbalFactory, @Psr\Container\ContainerInterface, @nette.cache)
+
+cycle.orm:
+	connection:
+		default:
+			dsn: "pgsql:host=%cycle.host%;port=%cycle.port%;dbname=%cycle.dbname%"
+			user: string(%cycle.user%)
+			password: string(%cycle.password%)
+			queryCache: false
+		postgres:
+			dsn: "pgsql:host=%cycle.host%;port=%cycle.port%;dbname=%cycle.dbname%"
+			user: string(%cycle.user%)
+			password: string(%cycle.password%)
+			queryCache: false
+	entityDirectory: app
+	cacheDirectory: ./var/temp

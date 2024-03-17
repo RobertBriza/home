@@ -8,7 +8,6 @@ use app\Day\Application\Query\GetDayDTOByValue;
 use app\Day\Infrastructure\DayInfoProvider;
 use app\System\Application\CQRS\CQRS;
 use app\System\Application\CQRS\CQRSAble;
-use app\System\Application\Helper\CustomTranslator;
 use app\System\Application\Vite\Vite;
 use app\System\UI\Http\Web\Template\BaseTemplate;
 use Contributte;
@@ -26,11 +25,7 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 
 	/** @inject */
 	public Cache $cache;
-	/** @inject */
-	public CustomTranslator $t;
 	public DateTimeImmutable $today;
-	/** @inject */
-	public Contributte\Translation\LocalesResolvers\Session $translatorSessionResolver;
 	protected DayInfoProvider $dayInfoProvider;
 	protected Vite $vite;
 
@@ -39,16 +34,6 @@ abstract class BasePresenter extends Presenter implements CQRSAble
 		$this->redrawControl('title');
 		$this->redrawControl('content');
 		$this->redrawControl('flashes');
-	}
-
-	public function handleChangeLocale(): void
-	{
-		$defaultLocale = 'cs';
-
-		$locale = $this->t->getLocale() === $defaultLocale ? 'en' : $defaultLocale;
-
-		$this->translatorSessionResolver->setLocale($locale);
-		$this->redirect('this');
 	}
 
 	public function setDayInfoProvider(DayInfoProvider $dayInfoProvider): void

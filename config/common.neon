@@ -1,4 +1,5 @@
 parameters:
+	project: /Users/robertbriza/Work/vite
 
 application:
 	errorPresenter: Error:Error
@@ -18,20 +19,7 @@ session:
 extensions:
 	resources: Contributte\DI\Extension\ResourceExtension
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
-	translation: Contributte\Translation\DI\TranslationExtension
 
-translation:
-	localeResolvers:
-		- Contributte\Translation\LocalesResolvers\Session
-	locales:
-		whitelist: [cs, en]
-		default: cs
-		fallback: [cs]
-	dirs:
-		- %appDir%/../lang
-	loaders:
-		yml: Symfony\Component\Translation\Loader\YamlFileLoader
-	returnOriginalMessage: true
 
 console:
 	name: Contributte

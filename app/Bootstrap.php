@@ -39,6 +39,8 @@ class Bootstrap
 			->addDirectory(__DIR__)
 			->register();
 
+		define('__APP_DIR__', __DIR__);
+
 		$resultDir = $_ENV["SECRET_DIR"];
 
 		self::renderSecrets($resultDir);

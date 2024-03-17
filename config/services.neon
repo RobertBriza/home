@@ -4,6 +4,7 @@ services:
 	- app\System\Application\Helper\TemplateRenderer(@twigEnvironment)
 	- app\System\Application\Mapping\Map\CollectionMap(typed(app\System\Application\Mapping\Map\Collection\CollectionTypeMap))
 	- app\Day\Infrastructure\DayInfoProvider(app\Day\Infrastructure\DayInfoClient::create())
+	- app\System\UI\Http\Web\DebugPresenter(@\app\System\Infrastructure\CycleDbalFactory::database('default'))
 
 	inflector: app\System\Application\Inflector\InflectorFactory::create()
 	configLoader:
@@ -13,11 +14,6 @@ services:
 	nette.latteFactory:
 			setup:
 					- addFilter(asset, app\System\Application\Latte\AssetFilter())
-
-	localStorage:
-		create: Nette\Caching\Storages\FileStorage(%tempDir%/cache)
-		autowired: false
-	- Nette\Caching\Cache(@localStorage, 'local-cache')
 
 decorator:
 	app\System\Application\CQRS\Command\CommandHandler:

@@ -1,0 +1,12 @@
+tracy:
+	email: brizarobertweb@gmail.com
+	maxLength: 500
+	maxDepth: 4
+	showLocation: false
+	showBar: true
+	dumpTheme: dark
+	editor: 'phpstorm://open?file=%file&line=%line'
+	bar:
+		- @cycle.logger
+	editorMapping:
+		/var/www/html: %project%

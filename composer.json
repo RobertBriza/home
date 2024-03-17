@@ -45,7 +45,16 @@
 		"doctrine/inflector": "^2.0",
 		"latte/latte": "^3.0",
 		"ramsey/uuid": "^4.7",
-		"ramsey/uuid-doctrine": "^2.0"
+		"ramsey/uuid-doctrine": "^2.0",
+		"cycle/orm": "^2.7",
+		"cycle/annotated": "^4.1",
+		"cycle/schema-builder": "^2.8",
+		"cycle/schema-renderer": "^1.2",
+		"cycle/entity-behavior": "^1.3",
+		"cycle/orm-promise-mapper": "^1.0",
+		"contributte/psr11-container-interface": "^0.6.0",
+		"loophp/collection": "^7.5",
+		"contributte/redis": "^0.5.4"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]

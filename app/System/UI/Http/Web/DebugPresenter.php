@@ -8,14 +8,17 @@ use app\Day\Application\Command\CreateDay;
 use app\Day\Application\Helper\DayHelper;
 use app\Day\Application\Query\GetDayDTOByValue;
 use app\Day\Domain\DTO\DayDTO;
-use app\System\Application\Mapping\Mapper;
+use app\Score\Domain\Score;
+use Cycle\Database\DatabaseInterface;
+use Cycle\ORM\ORM;
 use DateTimeImmutable;
-use Doctrine\ORM\EntityManagerInterface;
 
 class DebugPresenter extends BasePresenter
 {
-	public function __construct(public Mapper $mapper, public EntityManagerInterface $em)
-	{
+	public function __construct(
+		private readonly DatabaseInterface $database,
+		private readonly ORM $orm,
+	) {
 	}
 
 	public function actionCreateDay(): void
@@ -40,6 +43,11 @@ class DebugPresenter extends BasePresenter
 		$this->em->flush();
 
 		dumpe('saved');
+	}
+
+	public function actionCycle(): void
+	{
+		dumpe($this->orm->getRepository(Score::class)->findByPK(19));
 	}
 
 	public function actionGetDto(): void
